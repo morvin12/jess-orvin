@@ -18,7 +18,7 @@ const founders = [
     title: "Lead Agent & Team Lead",
     role: "Co-Founder",
     isFounder: true,
-    bio: "Southern Utah native and the driving force behind Utah's Elevated Real Estate. Jess brings an elevated approach to every transaction — combining deep local knowledge, cutting-edge marketing, and genuine care for her clients. When she's not closing deals, you'll find her exploring the canyon trails and sharing Southern Utah life with her audience on TikTok and Instagram.",
+    bio: "The driving force behind Utah's Elevated Real Estate. Jess brings an elevated approach to every transaction — combining sharp market knowledge, cutting-edge marketing, and genuine care for her clients. When she's not closing deals, you'll find her exploring the canyons and sharing Southern Utah life with her audience on TikTok and Instagram.",
     specialties: ["Luxury Homes", "Buyer Representation", "Listing Strategy", "Investment Properties"],
     social: { instagram: socials.jessInstagram.url },
   },

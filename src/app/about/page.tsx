@@ -62,7 +62,7 @@ export default function AboutPage() {
               </div>
               <h1 className="font-serif text-4xl sm:text-5xl text-white font-bold mb-4">About Jess Orvin</h1>
               <p className="text-white/60 text-lg mb-6 max-w-xl leading-relaxed">
-                Southern Utah native. Real estate expert. Lifestyle creator. Your guide to Red Rock Country.
+                Real estate expert. Lifestyle creator. Your guide to Red Rock Country.
               </p>
               <div className="flex items-center gap-4">
                 <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
@@ -109,7 +109,7 @@ export default function AboutPage() {
           <h2 className="font-serif text-3xl text-[#0d0d0d] font-bold mb-6">About Jess</h2>
           <div className="flex flex-col gap-4 text-[#6b7280] leading-relaxed">
             <p>
-              Jess Orvin is Southern Utah&apos;s real estate expert — born and raised in the red rock canyons, she knows this landscape the way only a true local can. She knows which neighborhoods are on the rise, which views are worth every penny, and why the people who move here never want to leave.
+              Jess Orvin fell in love with Southern Utah and never left. After building her career in one of the most breathtaking markets in the country, she knows which neighborhoods are on the rise, which views are worth every penny, and why the people who move here never want to leave.
             </p>
             <p>
               Her journey into real estate was a natural extension of her love for Southern Utah. After years of building deep local knowledge and genuine relationships in the community, Jess launched her career with a single belief: buyers and sellers in this market deserve more. More expertise. More marketing sophistication. More genuine care.
@@ -300,7 +300,7 @@ export default function AboutPage() {
             <div className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#c9a84c" }}>Founded By</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { initials: "JO", name: "Jess Orvin", role: "Co-Founder", detail: "Southern Utah native, lifestyle creator, and the driving force behind the team's vision." },
+                { initials: "JO", name: "Jess Orvin", role: "Co-Founder", detail: "Real estate powerhouse, lifestyle creator, and the driving force behind the team's vision." },
                 { initials: "CC", name: "Christina Childs", role: "Co-Founder", detail: "Operational expert and market strategist who keeps the team running at its absolute best." },
               ].map((founder) => (
                 <div key={founder.name} className="flex items-start gap-4 p-4" style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(201,168,76,0.2)" }}>

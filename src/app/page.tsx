@@ -429,7 +429,7 @@ export default function Home() {
               </h2>
               <div className="w-12 h-px bg-[#c9a84c] mb-8" />
               <p className="text-stone-500 text-sm leading-relaxed tracking-wide mb-5">
-                Born and raised in Southern Utah, Jess knows this landscape the way only a true local can. She knows which neighborhoods are on the rise, which canyon views are worth every penny, and why the people who move here never want to leave.
+                Jess discovered Southern Utah and never looked back. She knows which neighborhoods are on the rise, which canyon views are worth every penny, and why the people who move here never want to leave.
               </p>
               <p className="text-stone-500 text-sm leading-relaxed tracking-wide mb-10">
                 Known for her lifestyle brand on TikTok and Instagram, Jess brings the same eye for beauty and storytelling to every listing. She doesn&apos;t just sell homes — she tells their story.
