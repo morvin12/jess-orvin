@@ -213,7 +213,7 @@ function ListingsContent() {
               </div>
               <div>
                 <div className="font-semibold text-stone-900 text-sm">Jess Orvin&apos;s Listings</div>
-                <div className="text-xs text-stone-400">Lead Agent · Utah&apos;s Elevated Real Estate</div>
+                <div className="text-xs text-stone-400">Co-Founder · Utah&apos;s Elevated Real Estate</div>
               </div>
             </div>
           ) : (

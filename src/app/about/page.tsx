@@ -144,7 +144,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { label: "Utah Real Estate License", detail: "Licensed Realtor, State of Utah" },
-              { label: "Team Founder", detail: "Utah's Elevated Real Estate" },
+              { label: "Co-Founder", detail: "Utah's Elevated Real Estate" },
               { label: "Southern Utah Specialist", detail: "Washington County Expert" },
               { label: "Luxury Property Certified", detail: "High-end residential sales" },
               { label: "Investment Property Specialist", detail: "STR & long-term rental strategies" },
@@ -191,7 +191,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto flex items-center justify-center gap-6">
           <div className="flex-1 h-px bg-stone-200" />
           <div className="text-center px-4">
-            <p className="text-stone-400 text-xs font-semibold tracking-widest uppercase mb-1.5">Jess is also the founder of</p>
+            <p className="text-stone-400 text-xs font-semibold tracking-widest uppercase mb-1.5">Jess is co-founder of</p>
             <div className="flex items-center justify-center gap-3">
               <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
               <span className="font-serif text-xl font-bold" style={{ color: "#1a2744" }}>Utah&apos;s Elevated Real Estate</span>
@@ -271,7 +271,7 @@ export default function AboutPage() {
             <div className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#c9a84c" }}>Founded By</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { initials: "JO", name: "Jess Orvin", role: "Lead Agent & Co-Founder", detail: "Southern Utah native, lifestyle creator, and the driving force behind the team's vision." },
+                { initials: "JO", name: "Jess Orvin", role: "Co-Founder", detail: "Southern Utah native, lifestyle creator, and the driving force behind the team's vision." },
                 { initials: "CC", name: "Christina Childs", role: "Co-Founder", detail: "Operational expert and market strategist who keeps the team running at its absolute best." },
               ].map((founder) => (
                 <div key={founder.name} className="flex items-start gap-4 p-4 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(201,168,76,0.15)" }}>

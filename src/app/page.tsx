@@ -258,7 +258,7 @@ export default function Home() {
         <div className="relative z-10 flex items-center justify-center gap-6 max-w-4xl mx-auto">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent to-stone-300" />
           <div className="bg-[#f3f0eb] px-6 text-center">
-            <p className="text-stone-500 text-xs font-semibold tracking-widest uppercase mb-1.5">Jess is the founder of</p>
+            <p className="text-stone-500 text-xs font-semibold tracking-widest uppercase mb-1.5">Jess & Christina are co-founders of</p>
             <div className="flex items-center gap-3">
               <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
               <span className="font-serif text-lg font-bold" style={{ color: "#1a2744" }}>

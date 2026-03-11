@@ -182,7 +182,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <div className="font-serif font-bold text-stone-900">Jess Orvin</div>
-                  <div className="text-xs text-[#c1613a] font-semibold">Lead Agent & Team Founder</div>
+                  <div className="text-xs text-[#c1613a] font-semibold">Co-Founder</div>
                   <div className="text-xs text-stone-400">Utah&apos;s Elevated Real Estate</div>
                 </div>
               </div>
