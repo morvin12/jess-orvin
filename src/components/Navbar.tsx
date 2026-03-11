@@ -21,10 +21,9 @@ function InstagramIcon({ className }: { className?: string }) {
 }
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/listings", label: "Listings" },
-  { href: "/team", label: "The Team" },
   { href: "/about", label: "About" },
+  { href: "/listings", label: "Listings" },
+  { href: "/team", label: "Team" },
   { href: "/videos", label: "Videos" },
   { href: "/contact", label: "Contact" },
 ];
@@ -37,13 +36,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
 
-          {/* Logo */}
+          {/* Logo — Jess Orvin primary, team brand as subtle secondary */}
           <Link href="/" className="flex flex-col leading-tight group">
             <span className="font-serif text-xl lg:text-2xl font-bold text-stone-900 tracking-wide group-hover:text-[#c1613a] transition-colors">
               JESS ORVIN
             </span>
-            <span className="text-[10px] lg:text-xs text-[#c1613a] font-semibold tracking-widest uppercase">
-              Utah&apos;s Elevated Real Estate
+            <span className="text-[9px] lg:text-[10px] text-stone-400 font-medium tracking-widest uppercase">
+              Your Southern Utah Real Estate Expert
             </span>
           </Link>
 
@@ -58,6 +57,10 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {/* Subtle team brand identifier in the nav */}
+            <span className="text-[10px] text-stone-300 font-medium tracking-wider border-l border-stone-100 pl-6">
+              Utah&apos;s Elevated Real Estate
+            </span>
           </div>
 
           {/* Desktop Right: Socials + CTA */}
@@ -116,7 +119,11 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <div className="flex items-center gap-4 pt-3 pb-1">
+            {/* Team brand label */}
+            <div className="pt-2 pb-1">
+              <span className="text-[10px] text-stone-400 font-medium tracking-wider uppercase">Utah&apos;s Elevated Real Estate</span>
+            </div>
+            <div className="flex items-center gap-4 pt-1 pb-1">
               <a
                 href={socials.jessTikTok.url}
                 target="_blank"

@@ -57,6 +57,10 @@ export default function Home() {
       <Navbar />
       <LeadModal listing={selectedListing} onClose={() => setSelectedListing(null)} />
 
+      {/* ══════════════════════════════════════════════
+          JESS ORVIN — PERSONAL BRAND
+      ══════════════════════════════════════════════ */}
+
       {/* ── HERO ──────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Background */}
@@ -76,7 +80,7 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-16">
-          {/* Social icons in hero */}
+          {/* Social icons in hero — Jess's personal socials */}
           <div className="flex items-center justify-center gap-4 mb-8">
             <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
                className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs transition-colors">
@@ -95,7 +99,7 @@ export default function Home() {
           <div className="inline-flex items-center gap-2 mb-6">
             <div className="w-8 h-px bg-[#c1613a]" />
             <span className="text-[#d4a574] text-xs font-semibold tracking-[0.25em] uppercase">
-              Southern Utah Real Estate
+              Southern Utah Real Estate Expert
             </span>
             <div className="w-8 h-px bg-[#c1613a]" />
           </div>
@@ -106,16 +110,11 @@ export default function Home() {
           </h1>
 
           <p className="text-white/75 text-lg sm:text-xl max-w-2xl mx-auto mb-3 leading-relaxed">
-            Expert guidance from a local agent who knows every canyon, community, and hidden gem in Southern Utah.
-          </p>
-
-          {/* Team brand line */}
-          <p className="text-[#d4a574] text-sm font-semibold tracking-wide mb-10">
-            Jess Orvin · Lead Agent, Utah&apos;s Elevated Real Estate
+            Your Southern Utah Real Estate Expert — Jess Orvin knows every canyon, community, and hidden gem in the region.
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <Link href="/listings"
                className="bg-[#c1613a] hover:bg-[#a8502f] text-white font-semibold px-8 py-4 rounded-full text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
               Search Listings →
@@ -128,8 +127,14 @@ export default function Home() {
 
           {/* Headshot placeholder */}
           <div className="mt-14 flex items-center justify-center">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4a574] to-[#c1613a] flex items-center justify-center border-4 border-white/20 shadow-xl">
-              <span className="font-serif text-2xl font-bold text-white">JO</span>
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4a574] to-[#c1613a] flex items-center justify-center border-4 border-white/20 shadow-xl">
+                <span className="font-serif text-2xl font-bold text-white">JO</span>
+              </div>
+              <div className="text-center">
+                <div className="text-white font-serif font-bold text-base">Jess Orvin</div>
+                <div className="text-white/60 text-xs">Your Southern Utah Real Estate Expert</div>
+              </div>
             </div>
           </div>
         </div>
@@ -142,15 +147,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS BAR ─────────────────────────────────────────── */}
+      {/* ── JESS'S PERSONAL STATS ─────────────────────────────── */}
       <section className="bg-white border-y border-stone-100">
         <div className="max-w-5xl mx-auto px-4 py-8">
+          <div className="text-center mb-5">
+            <div className="text-[10px] font-semibold text-[#c1613a] tracking-widest uppercase">Jess by the Numbers</div>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
               { value: "50+", label: "Homes Sold" },
               { value: "5★", label: "Client Rating" },
-              { value: "6", label: "Team Agents" },
               { value: "10+", label: "Years in Southern Utah" },
+              { value: "#1", label: "Your Expert in St. George" },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
                 <div className="font-serif text-3xl font-bold text-[#c1613a] mb-1">{stat.value}</div>
@@ -161,14 +169,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FEATURED LISTINGS (JESS) ──────────────────────────── */}
+      {/* ── JESS'S FEATURED LISTINGS ──────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
             <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Jess&apos;s Listings</div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">Featured Properties</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">Personally Listed by Jess</h2>
             <p className="text-stone-500 mt-2 text-sm max-w-md">
-              Personally listed and marketed by Jess — each one elevated to stand out.
+              Every property Jess personally lists is elevated — from photography to pricing strategy.
             </p>
           </div>
           <Link href="/listings" className="text-[#c1613a] hover:text-[#a8502f] font-semibold text-sm flex items-center gap-1 flex-shrink-0 transition-colors">
@@ -190,31 +198,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TEAM LISTINGS ────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#f3f0eb" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-            <div>
-              <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">The Team</div>
-              <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">Team Listings</h2>
-              <p className="text-stone-500 mt-2 text-sm max-w-md">
-                More great properties across Southern Utah, listed by the Utah&apos;s Elevated Real Estate team.
-              </p>
-            </div>
-            <Link href="/listings?tab=team" className="text-[#c1613a] hover:text-[#a8502f] font-semibold text-sm flex items-center gap-1 flex-shrink-0 transition-colors">
-              All Team Listings →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamListings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} onViewDetails={setSelectedListing} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ABOUT MINI ────────────────────────────────────────── */}
+      {/* ── ABOUT JESS MINI ───────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Photo placeholder */}
@@ -227,86 +211,183 @@ export default function Home() {
               </div>
               {/* Accent badge */}
               <div className="absolute -bottom-4 -right-4 bg-[#c1613a] text-white rounded-xl px-4 py-3 shadow-lg">
-                <div className="text-xs font-semibold opacity-80 uppercase tracking-wider">Team Lead</div>
-                <div className="font-serif font-bold text-sm">Utah&apos;s Elevated</div>
+                <div className="text-xs font-semibold opacity-80 uppercase tracking-wider">Local Expert</div>
+                <div className="font-serif font-bold text-sm">Southern Utah</div>
               </div>
             </div>
           </div>
 
           {/* Text */}
           <div>
-            <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-3">Lead Agent & Founder</div>
+            <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-3">Your Southern Utah Expert</div>
             <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold mb-5">Meet Jess Orvin</h2>
             <p className="text-stone-600 leading-relaxed mb-4">
-              Southern Utah native and lead agent at Utah&apos;s Elevated Real Estate. I built this team to do things differently — with elevated marketing, genuine relationships, and deep local knowledge that only comes from truly living here.
+              Born and raised in Southern Utah, Jess knows this landscape the way only a true local can. She knows which neighborhoods are on the rise, which canyon views are worth every penny, and why the people who move here never want to leave.
             </p>
             <p className="text-stone-600 leading-relaxed mb-8">
-              Whether you&apos;re searching for your forever home in the shadow of Snow Canyon or selling a luxury estate in Entrada, my team and I bring the same passion and precision to every transaction.
+              Known for her authentic lifestyle brand on TikTok and Instagram, Jess brings the same eye for beauty and storytelling to every listing she touches. She doesn&apos;t just sell homes — she tells their story.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/about"
                  className="inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-stone-800 text-white font-semibold px-6 py-3 rounded-full text-sm transition-colors">
                 Learn More About Jess →
               </Link>
-              <Link href="/team"
-                 className="inline-flex items-center justify-center gap-2 border border-stone-200 hover:border-stone-400 text-stone-700 font-semibold px-6 py-3 rounded-full text-sm transition-colors">
-                Meet the Full Team
-              </Link>
+              <div className="flex items-center gap-3">
+                <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
+                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c1613a] text-stone-600 hover:text-[#c1613a] font-semibold px-4 py-3 rounded-full text-sm transition-colors">
+                  <TikTokIcon className="w-3.5 h-3.5" />
+                  {socials.jessTikTok.handle}
+                </a>
+                <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
+                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c1613a] text-stone-600 hover:text-[#c1613a] font-semibold px-4 py-3 rounded-full text-sm transition-colors">
+                  <InstagramIcon className="w-3.5 h-3.5" />
+                  {socials.jessInstagram.handle}
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── MEET THE TEAM (mini) ───────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-stone-900">
+      {/* ══════════════════════════════════════════════
+          BRAND TRANSITION DIVIDER
+      ══════════════════════════════════════════════ */}
+      <section className="relative py-14 px-4 overflow-hidden" style={{ backgroundColor: "#f3f0eb" }}>
+        {/* Decorative lines */}
+        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-stone-200" />
+        <div className="relative z-10 flex items-center justify-center gap-6 max-w-4xl mx-auto">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-stone-300" />
+          <div className="bg-[#f3f0eb] px-6 text-center">
+            <p className="text-stone-500 text-xs font-semibold tracking-widest uppercase mb-1.5">Jess is the founder of</p>
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
+              <span className="font-serif text-lg font-bold" style={{ color: "#1a2744" }}>
+                Utah&apos;s Elevated Real Estate
+              </span>
+              <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
+            </div>
+            <p className="text-stone-400 text-xs mt-1.5">Utah&apos;s Premier Real Estate Team</p>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-stone-300" />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          UTAH'S ELEVATED REAL ESTATE — TEAM BRAND
+      ══════════════════════════════════════════════ */}
+
+      {/* ── TEAM BRAND BANNER ─────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#1a2744" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <div className="text-xs font-semibold text-[#d4a574] tracking-widest uppercase mb-3">Utah&apos;s Elevated Real Estate</div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold mb-3">The Dream Team</h2>
-            <p className="text-stone-400 max-w-lg mx-auto text-sm">
-              Six specialists. One mission. Helping you buy, sell, and love where you live in Southern Utah.
+            {/* Team logo/wordmark */}
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="w-10 h-px" style={{ backgroundColor: "#c9a84c" }} />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center border-2" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
+                <span className="font-serif text-lg font-bold" style={{ color: "#c9a84c" }}>UE</span>
+              </div>
+              <div className="w-10 h-px" style={{ backgroundColor: "#c9a84c" }} />
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
+              Utah&apos;s Elevated Real Estate
+            </h2>
+            <p className="font-semibold text-sm tracking-widest uppercase" style={{ color: "#c9a84c" }}>
+              Utah&apos;s Premier Real Estate Team
             </p>
-            {/* Team Instagram */}
+            <p className="text-white/60 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
+              Founded by Jess Orvin &amp; Christina Childs, Utah&apos;s Elevated Real Estate is the region&apos;s most innovative team — bringing elevated marketing, deep local expertise, and a genuine commitment to every client.
+            </p>
             <a href={socials.teamInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-1.5 text-stone-500 hover:text-[#d4a574] text-xs mt-3 transition-colors">
-              <InstagramIcon className="w-3.5 h-3.5" />
+               className="inline-flex items-center gap-1.5 text-sm mt-5 transition-colors" style={{ color: "#c9a84c" }}>
+              <InstagramIcon className="w-4 h-4" />
               {socials.teamInstagram.handle}
             </a>
           </div>
 
+          {/* Team Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-10">
+            {[
+              { value: "6", label: "Team Specialists" },
+              { value: "100+", label: "Homes Sold" },
+              { value: "5★", label: "Team Rating" },
+              { value: "2", label: "Locations Served" },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center">
+                <div className="font-serif text-3xl font-bold mb-1" style={{ color: "#c9a84c" }}>{stat.value}</div>
+                <div className="text-xs font-medium tracking-wide uppercase text-white/50">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Team Members mini grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
             {[
-              { initials: "JO", name: "Jess Orvin", title: "Lead Agent & Team Lead", color: "from-[#c1613a] to-orange-800" },
-              { initials: "CC", name: "Christina Childs", title: "Co-Founder", color: "from-[#d4a574] to-amber-700" },
-              { initials: "TB", name: "Tyler Brooks", title: "Real Estate Agent", color: "from-stone-500 to-stone-700" },
-              { initials: "MC", name: "Madison Clark", title: "Real Estate Agent", color: "from-stone-500 to-stone-700" },
-              { initials: "RT", name: "Ryan Torres", title: "Real Estate Agent", color: "from-stone-500 to-stone-700" },
-              { initials: "KJ", name: "Kayla Jensen", title: "Real Estate Agent", color: "from-stone-500 to-stone-700" },
-            ].map((member) => (
+              { initials: "JO", name: "Jess Orvin", title: "Lead Agent & Founder" },
+              { initials: "CC", name: "Christina Childs", title: "Co-Founder" },
+              { initials: "TB", name: "Tyler Brooks", title: "Real Estate Agent" },
+              { initials: "MC", name: "Madison Clark", title: "Real Estate Agent" },
+              { initials: "RT", name: "Ryan Torres", title: "Real Estate Agent" },
+              { initials: "KJ", name: "Kayla Jensen", title: "Real Estate Agent" },
+            ].map((member, i) => (
               <div key={member.name} className="flex flex-col items-center text-center">
-                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${member.color} flex items-center justify-center mb-3 shadow-lg`}>
-                  <span className="font-serif text-xl font-bold text-white">{member.initials}</span>
+                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mb-3 shadow-lg border ${i < 2 ? "border-yellow-600/40" : "border-white/10"}`}
+                     style={{ backgroundColor: i < 2 ? "rgba(201,168,76,0.2)" : "rgba(255,255,255,0.08)" }}>
+                  <span className="font-serif text-xl font-bold" style={{ color: i < 2 ? "#c9a84c" : "rgba(255,255,255,0.7)" }}>{member.initials}</span>
                 </div>
                 <div className="text-white text-xs font-semibold leading-tight mb-0.5">{member.name}</div>
-                <div className="text-stone-500 text-[10px]">{member.title}</div>
+                <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>{member.title}</div>
               </div>
             ))}
           </div>
 
           <div className="text-center">
             <Link href="/team"
-               className="inline-flex items-center gap-2 border border-stone-700 hover:border-[#d4a574] text-stone-300 hover:text-[#d4a574] font-semibold px-7 py-3 rounded-full text-sm transition-all">
+               className="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded-full text-sm transition-all border"
+               style={{ backgroundColor: "#c9a84c", borderColor: "#c9a84c", color: "#1a2744" }}>
               Meet the Full Team →
             </Link>
           </div>
         </div>
       </section>
 
+      {/* ── UTAH'S ELEVATED REAL ESTATE LISTINGS ─────────────── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#111d33" }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2 mb-3">
+                <div className="w-4 h-px" style={{ backgroundColor: "#c9a84c" }} />
+                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#c9a84c" }}>
+                  Utah&apos;s Elevated Real Estate
+                </span>
+              </div>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white">Team Listings</h2>
+              <p className="mt-2 text-sm max-w-md" style={{ color: "rgba(255,255,255,0.5)" }}>
+                Properties listed by the Utah&apos;s Elevated Real Estate team — six specialists, one standard of excellence.
+              </p>
+            </div>
+            <Link href="/listings?tab=team" className="font-semibold text-sm flex items-center gap-1 flex-shrink-0 transition-colors" style={{ color: "#c9a84c" }}>
+              All Team Listings →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {teamListings.map((listing) => (
+              <ListingCard key={listing.id} listing={listing} onViewDetails={setSelectedListing} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          BACK TO JESS — TESTIMONIALS, VIDEOS, SOCIAL
+      ══════════════════════════════════════════════ */}
+
       {/* ── TESTIMONIALS ─────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Client Stories</div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">What Our Clients Say</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">What Clients Say About Jess</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -336,8 +417,8 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Market Insights</div>
-              <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">Watch My Latest Videos</h2>
-              <p className="text-stone-500 mt-2 text-sm">Market updates, neighborhood guides, and buyer/seller tips from Jess.</p>
+              <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">Jess&apos;s Latest Videos</h2>
+              <p className="text-stone-500 mt-2 text-sm">Market updates, neighborhood guides, and buyer/seller tips — straight from Jess.</p>
             </div>
             <Link href="/videos" className="text-[#c1613a] hover:text-[#a8502f] font-semibold text-sm flex-shrink-0 transition-colors">
               View All Videos →
@@ -362,7 +443,7 @@ export default function Home() {
                 </div>
                 <div className="p-4">
                   <p className="text-white text-sm font-medium leading-snug">{video.title}</p>
-                  <p className="text-stone-500 text-xs mt-1">Jess Orvin · Utah&apos;s Elevated Real Estate</p>
+                  <p className="text-stone-500 text-xs mt-1">Jess Orvin</p>
                 </div>
               </div>
             ))}
@@ -377,11 +458,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FOLLOW / SOCIAL ───────────────────────────────────── */}
+      {/* ── FOLLOW JESS / SOCIAL ──────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-10">
           <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Stay Connected</div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold mb-3">Follow Along</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold mb-3">Follow Jess</h2>
           <p className="text-stone-500 text-sm max-w-md mx-auto">
             Behind-the-scenes listings, market tips, and Southern Utah life — on TikTok and Instagram.
           </p>
@@ -436,7 +517,7 @@ export default function Home() {
             Let&apos;s Find Your Place in Southern Utah
           </h2>
           <p className="text-white/70 mb-10 max-w-xl mx-auto">
-            Whether you&apos;re buying your first home or selling a luxury estate, Jess and the Utah&apos;s Elevated Real Estate team are ready to guide you every step of the way.
+            Whether you&apos;re buying your first home or selling a luxury estate, Jess is ready to guide you every step of the way — backed by the full Utah&apos;s Elevated Real Estate team.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/listings"
