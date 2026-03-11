@@ -67,7 +67,7 @@ const agents = [
 
 export default function TeamPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#faf8f5" }}>
+    <div className="min-h-screen bg-white">
       <Navbar />
 
       {/* ── TEAM HERO — Navy/Gold branding (distinct from Jess personal brand) ── */}
@@ -76,7 +76,7 @@ export default function TeamPage() {
           {/* Gold divider top */}
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="w-12 h-px" style={{ backgroundColor: "#c9a84c" }} />
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center border" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
+            <div className="w-10 h-10 flex items-center justify-center border" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
               <span className="font-serif text-sm font-bold" style={{ color: "#c9a84c" }}>UE</span>
             </div>
             <div className="w-12 h-px" style={{ backgroundColor: "#c9a84c" }} />
@@ -135,7 +135,7 @@ export default function TeamPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {founders.map((founder) => (
-            <div key={founder.name} className="bg-white rounded-2xl shadow-sm border overflow-hidden" style={{ borderColor: "rgba(26,39,68,0.1)" }}>
+            <div key={founder.name} className="bg-white shadow-sm border overflow-hidden" style={{ borderColor: "rgba(26,39,68,0.1)" }}>
               {/* Photo area — navy gradient */}
               <div className="h-64 relative flex items-end p-6" style={{ background: "linear-gradient(135deg, #1a2744 0%, #243460 60%, #1a3a5c 100%)" }}>
                 {/* Subtle pattern */}
@@ -146,16 +146,16 @@ export default function TeamPage() {
                 </div>
                 {/* Gold accent line */}
                 <div className="absolute top-0 left-0 right-0 h-1" style={{ backgroundColor: "#c9a84c" }} />
-                {/* Initials circle */}
+                {/* Initials square */}
                 <div className="relative z-10 flex items-end gap-4">
-                  <div className="w-24 h-24 rounded-2xl flex items-center justify-center backdrop-blur-sm shadow-lg border-2" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
+                  <div className="w-24 h-24 flex items-center justify-center backdrop-blur-sm shadow-lg border-2" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
                     <span className="font-serif text-3xl font-bold" style={{ color: "#c9a84c" }}>{founder.initials}</span>
                   </div>
                   <div className="pb-1">
                     <div className="text-white font-serif text-2xl font-bold leading-tight">{founder.name}</div>
                     <div className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>{founder.title}</div>
                     {founder.role && (
-                      <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider uppercase" style={{ backgroundColor: "rgba(201,168,76,0.2)", color: "#c9a84c" }}>
+                      <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-sm tracking-wider uppercase" style={{ backgroundColor: "rgba(201,168,76,0.2)", color: "#c9a84c" }}>
                         {founder.role}
                       </span>
                     )}
@@ -172,7 +172,7 @@ export default function TeamPage() {
                   <div className="text-[10px] font-semibold text-stone-400 uppercase tracking-wider mb-2">Specialties</div>
                   <div className="flex flex-wrap gap-2">
                     {founder.specialties.map((s) => (
-                      <span key={s} className="text-xs font-medium px-3 py-1 rounded-full border" style={{ backgroundColor: "rgba(26,39,68,0.04)", borderColor: "rgba(26,39,68,0.1)", color: "#1a2744" }}>
+                      <span key={s} className="text-xs font-medium px-3 py-1 rounded-sm border" style={{ backgroundColor: "rgba(26,39,68,0.04)", borderColor: "rgba(26,39,68,0.1)", color: "#1a2744" }}>
                         {s}
                       </span>
                     ))}
@@ -192,7 +192,7 @@ export default function TeamPage() {
 
                 <div className="mt-4">
                   <Link href="/contact"
-                     className="w-full flex items-center justify-center font-semibold py-2.5 rounded-xl text-sm transition-colors text-white"
+                     className="w-full flex items-center justify-center font-semibold py-2.5 rounded-sm text-sm transition-colors text-white"
                      style={{ backgroundColor: "#1a2744" }}>
                     Connect with {founder.name.split(" ")[0]}
                   </Link>
@@ -213,7 +213,7 @@ export default function TeamPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {agents.map((agent) => (
-            <div key={agent.name} className="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden group hover:shadow-md transition-shadow">
+            <div key={agent.name} className="bg-white shadow-sm border border-stone-100 overflow-hidden group hover:shadow-md transition-shadow">
               {/* Photo area — navy */}
               <div className="h-40 relative flex items-end p-4" style={{ background: "linear-gradient(135deg, #1a2744 0%, #243460 100%)" }}>
                 <div className="absolute inset-0 overflow-hidden opacity-10">
@@ -223,7 +223,7 @@ export default function TeamPage() {
                 </div>
                 <div className="absolute top-0 left-0 right-0 h-0.5" style={{ backgroundColor: "#c9a84c" }} />
                 <div className="relative z-10 flex items-end gap-3">
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center border" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "rgba(201,168,76,0.4)" }}>
+                  <div className="w-14 h-14 flex items-center justify-center border" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "rgba(201,168,76,0.4)" }}>
                     <span className="font-serif text-lg font-bold" style={{ color: "#c9a84c" }}>{agent.initials}</span>
                   </div>
                   <div>
@@ -237,13 +237,13 @@ export default function TeamPage() {
                 <p className="text-stone-500 text-xs leading-relaxed mb-4">{agent.bio}</p>
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {agent.specialties.map((s) => (
-                    <span key={s} className="text-[10px] font-medium px-2 py-0.5 rounded-full border" style={{ backgroundColor: "rgba(26,39,68,0.04)", borderColor: "rgba(26,39,68,0.1)", color: "#1a2744" }}>
+                    <span key={s} className="text-[10px] font-medium px-2 py-0.5 rounded-sm border" style={{ backgroundColor: "rgba(26,39,68,0.04)", borderColor: "rgba(26,39,68,0.1)", color: "#1a2744" }}>
                       {s}
                     </span>
                   ))}
                 </div>
                 <Link href="/contact"
-                   className="w-full flex items-center justify-center border font-semibold py-2 rounded-lg text-xs transition-colors"
+                   className="w-full flex items-center justify-center border font-semibold py-2 rounded-sm text-xs transition-colors"
                    style={{ borderColor: "rgba(26,39,68,0.2)", color: "#1a2744" }}>
                   Get in Touch
                 </Link>
@@ -266,7 +266,7 @@ export default function TeamPage() {
             Utah&apos;s Elevated Real Estate is always looking for exceptional agents who share our commitment to quality and client care.
           </p>
           <Link href="/contact"
-             className="inline-flex items-center gap-2 font-semibold px-7 py-3 rounded-full text-sm transition-all"
+             className="inline-flex items-center gap-2 font-semibold px-7 py-3 rounded-sm text-sm transition-all"
              style={{ backgroundColor: "#c9a84c", color: "#1a2744" }}>
             Reach Out to Jess or Christina →
           </Link>

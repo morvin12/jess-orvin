@@ -32,17 +32,20 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-100 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-stone-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
 
-          {/* Logo — Jess Orvin primary, team brand as subtle secondary */}
+          {/* Logo */}
           <Link href="/" className="flex flex-col leading-tight group">
-            <span className="font-serif text-xl lg:text-2xl font-bold text-stone-900 tracking-wide group-hover:text-[#c1613a] transition-colors">
+            <span className="font-serif text-xl lg:text-2xl font-bold text-[#0d0d0d] tracking-wide">
               JESS ORVIN
             </span>
-            <span className="text-[9px] lg:text-[10px] text-stone-400 font-medium tracking-widest uppercase">
-              Your Southern Utah Real Estate Expert
+            <span className="flex items-center gap-1.5">
+              <span className="w-4 h-px bg-[#c9a84c]" />
+              <span className="text-[9px] lg:text-[10px] text-[#6b7280] font-medium tracking-widest uppercase">
+                Southern Utah Real Estate Expert
+              </span>
             </span>
           </Link>
 
@@ -52,25 +55,24 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-stone-600 hover:text-[#c1613a] transition-colors"
+                className="text-sm font-medium text-[#0d0d0d] hover:text-[#8b1a4a] transition-colors tracking-wide"
               >
                 {link.label}
               </Link>
             ))}
-            {/* Subtle team brand identifier in the nav */}
             <span className="text-[10px] text-stone-300 font-medium tracking-wider border-l border-stone-100 pl-6">
               Utah&apos;s Elevated Real Estate
             </span>
           </div>
 
-          {/* Desktop Right: Socials + CTA */}
+          {/* Desktop Right */}
           <div className="hidden lg:flex items-center gap-3">
             <a
               href={socials.jessTikTok.url}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Jess on TikTok"
-              className="text-stone-400 hover:text-[#c1613a] transition-colors"
+              className="text-stone-400 hover:text-[#0d0d0d] transition-colors"
             >
               <TikTokIcon className="w-4 h-4" />
             </a>
@@ -79,29 +81,29 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Jess on Instagram"
-              className="text-stone-400 hover:text-[#c1613a] transition-colors"
+              className="text-stone-400 hover:text-[#0d0d0d] transition-colors"
             >
               <InstagramIcon className="w-4 h-4" />
             </a>
             <div className="w-px h-4 bg-stone-200 mx-1" />
             <Link
               href="/contact"
-              className="bg-[#c1613a] hover:bg-[#a8502f] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm"
+              className="bg-[#8b1a4a] hover:bg-[#6d1439] text-white text-sm font-semibold px-5 py-2.5 rounded-sm transition-colors"
             >
-              Find Your Home
+              Contact Jess
             </Link>
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-2 text-stone-700"
+            className="lg:hidden p-2 text-[#0d0d0d]"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
             <div className="w-6 flex flex-col gap-1.5">
-              <span className={`block h-0.5 bg-stone-700 transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-              <span className={`block h-0.5 bg-stone-700 transition-all duration-200 ${menuOpen ? "opacity-0 scale-x-0" : ""}`} />
-              <span className={`block h-0.5 bg-stone-700 transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+              <span className={`block h-0.5 bg-[#0d0d0d] transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`block h-0.5 bg-[#0d0d0d] transition-all duration-200 ${menuOpen ? "opacity-0 scale-x-0" : ""}`} />
+              <span className={`block h-0.5 bg-[#0d0d0d] transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
             </div>
           </button>
         </div>
@@ -113,13 +115,12 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-stone-700 font-medium py-2.5 px-1 hover:text-[#c1613a] transition-colors border-b border-stone-50 last:border-0"
+                className="text-[#0d0d0d] font-medium py-2.5 px-1 hover:text-[#8b1a4a] transition-colors border-b border-stone-50 last:border-0 tracking-wide"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            {/* Team brand label */}
             <div className="pt-2 pb-1">
               <span className="text-[10px] text-stone-400 font-medium tracking-wider uppercase">Utah&apos;s Elevated Real Estate</span>
             </div>
@@ -128,7 +129,7 @@ export default function Navbar() {
                 href={socials.jessTikTok.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-stone-500 hover:text-[#c1613a] text-sm transition-colors"
+                className="flex items-center gap-2 text-stone-500 hover:text-[#8b1a4a] text-sm transition-colors"
               >
                 <TikTokIcon className="w-4 h-4" />
                 {socials.jessTikTok.handle}
@@ -137,7 +138,7 @@ export default function Navbar() {
                 href={socials.jessInstagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-stone-500 hover:text-[#c1613a] text-sm transition-colors"
+                className="flex items-center gap-2 text-stone-500 hover:text-[#8b1a4a] text-sm transition-colors"
               >
                 <InstagramIcon className="w-4 h-4" />
                 {socials.jessInstagram.handle}
@@ -145,10 +146,10 @@ export default function Navbar() {
             </div>
             <Link
               href="/contact"
-              className="mt-2 bg-[#c1613a] hover:bg-[#a8502f] text-white text-sm font-semibold px-5 py-3 rounded-full text-center transition-colors"
+              className="mt-2 bg-[#8b1a4a] hover:bg-[#6d1439] text-white text-sm font-semibold px-5 py-3 rounded-sm text-center transition-colors"
               onClick={() => setMenuOpen(false)}
             >
-              Find Your Home
+              Contact Jess
             </Link>
           </div>
         )}

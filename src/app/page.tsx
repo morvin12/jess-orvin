@@ -53,7 +53,7 @@ export default function Home() {
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#faf8f5" }}>
+    <div className="min-h-screen bg-white">
       <Navbar />
       <LeadModal listing={selectedListing} onClose={() => setSelectedListing(null)} />
 
@@ -62,78 +62,75 @@ export default function Home() {
       ══════════════════════════════════════════════ */}
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-orange-950" />
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0d0d0d]">
+        {/* Gold accent lines */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-[#c9a84c] opacity-40" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#c9a84c] opacity-20" />
 
-        {/* Canyon silhouette layer */}
-        <div className="absolute inset-0 overflow-hidden opacity-30">
-          <svg viewBox="0 0 1440 800" className="absolute bottom-0 w-full" preserveAspectRatio="xMidYMax slice">
-            <path d="M0 800 L0 500 Q100 400 200 450 L300 300 L400 380 Q500 280 600 320 L700 180 L820 260 Q920 160 1020 210 L1120 120 L1240 200 L1340 140 L1440 180 L1440 800 Z" fill="#c1613a" opacity="0.4"/>
-            <path d="M0 800 L0 580 Q120 520 230 550 L360 480 L490 520 Q600 460 720 490 L850 420 L970 460 Q1080 390 1190 430 L1310 370 L1440 400 L1440 800 Z" fill="#d4a574" opacity="0.25"/>
-            <path d="M0 800 L0 650 Q180 610 300 630 L450 590 L600 615 Q750 570 880 595 L1020 555 L1160 580 L1300 545 L1440 565 L1440 800 Z" fill="white" opacity="0.06"/>
-          </svg>
-        </div>
-
-        {/* Warm tint overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+        {/* Subtle grid texture */}
+        <div className="absolute inset-0 opacity-[0.03]"
+          style={{ backgroundImage: "linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-16">
-          {/* Social icons in hero — Jess's personal socials */}
-          <div className="flex items-center justify-center gap-4 mb-8">
+          {/* Social icons */}
+          <div className="flex items-center justify-center gap-4 mb-10">
             <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs transition-colors">
+               className="flex items-center gap-1.5 text-white/50 hover:text-[#c9a84c] text-xs transition-colors tracking-wider uppercase">
               <TikTokIcon className="w-3.5 h-3.5" />
               <span>{socials.jessTikTok.handle}</span>
             </a>
-            <span className="text-white/30">·</span>
+            <span className="text-white/20">·</span>
             <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs transition-colors">
+               className="flex items-center gap-1.5 text-white/50 hover:text-[#c9a84c] text-xs transition-colors tracking-wider uppercase">
               <InstagramIcon className="w-3.5 h-3.5" />
               <span>{socials.jessInstagram.handle}</span>
             </a>
           </div>
 
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 mb-6">
-            <div className="w-8 h-px bg-[#c1613a]" />
-            <span className="text-[#d4a574] text-xs font-semibold tracking-[0.25em] uppercase">
+          {/* Eyebrow label */}
+          <div className="inline-flex items-center gap-3 mb-8">
+            <div className="w-12 h-px bg-[#c9a84c]" />
+            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">
               Southern Utah Real Estate Expert
             </span>
-            <div className="w-8 h-px bg-[#c1613a]" />
+            <div className="w-12 h-px bg-[#c9a84c]" />
           </div>
 
           {/* H1 */}
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-tight mb-6">
-            Find Your Dream Home<br className="hidden sm:block" /> in Red Rock Country
+          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white font-bold leading-none mb-6 tracking-tight">
+            Your Home.<br />
+            <span className="relative inline-block">
+              Your Legacy.
+              <span className="absolute bottom-1 left-0 right-0 h-0.5 bg-[#c9a84c]" />
+            </span>
           </h1>
 
-          <p className="text-white/75 text-lg sm:text-xl max-w-2xl mx-auto mb-3 leading-relaxed">
-            Your Southern Utah Real Estate Expert — Jess Orvin knows every canyon, community, and hidden gem in the region.
+          <p className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-3 leading-relaxed">
+            Jess Orvin — Southern Utah&apos;s most trusted real estate expert. Commanding results, unmatched expertise, genuine care.
           </p>
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <Link href="/listings"
-               className="bg-[#c1613a] hover:bg-[#a8502f] text-white font-semibold px-8 py-4 rounded-full text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+               className="bg-[#8b1a4a] hover:bg-[#6d1439] text-white font-semibold px-8 py-4 rounded-sm text-base transition-all">
               Search Listings →
             </Link>
             <Link href="/contact"
-               className="border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-full text-base transition-all backdrop-blur-sm">
+               className="border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-8 py-4 rounded-sm text-base transition-all">
               Work With Jess
             </Link>
           </div>
 
-          {/* Headshot placeholder */}
-          <div className="mt-14 flex items-center justify-center">
+          {/* Identity mark */}
+          <div className="mt-16 flex items-center justify-center">
             <div className="flex flex-col items-center gap-3">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4a574] to-[#c1613a] flex items-center justify-center border-4 border-white/20 shadow-xl">
-                <span className="font-serif text-2xl font-bold text-white">JO</span>
+              <div className="w-20 h-20 bg-[#111111] border border-[#c9a84c] flex items-center justify-center">
+                <span className="font-serif text-2xl font-bold text-[#c9a84c]">JO</span>
               </div>
               <div className="text-center">
-                <div className="text-white font-serif font-bold text-base">Jess Orvin</div>
-                <div className="text-white/60 text-xs">Your Southern Utah Real Estate Expert</div>
+                <div className="text-white font-serif font-bold text-base tracking-wide">JESS ORVIN</div>
+                <div className="text-white/40 text-xs tracking-widest uppercase mt-0.5">Southern Utah Real Estate Expert</div>
               </div>
             </div>
           </div>
@@ -141,7 +138,7 @@ export default function Home() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-5 h-5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-5 h-5 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </div>
@@ -149,9 +146,9 @@ export default function Home() {
 
       {/* ── JESS'S PERSONAL STATS ─────────────────────────────── */}
       <section className="bg-white border-y border-stone-100">
-        <div className="max-w-5xl mx-auto px-4 py-8">
-          <div className="text-center mb-5">
-            <div className="text-[10px] font-semibold text-[#c1613a] tracking-widest uppercase">Jess by the Numbers</div>
+        <div className="max-w-5xl mx-auto px-4 py-10">
+          <div className="text-center mb-6">
+            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Jess by the Numbers</div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
@@ -161,8 +158,8 @@ export default function Home() {
               { value: "#1", label: "Your Expert in St. George" },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
-                <div className="font-serif text-3xl font-bold text-[#c1613a] mb-1">{stat.value}</div>
-                <div className="text-xs text-stone-500 font-medium tracking-wide uppercase">{stat.label}</div>
+                <div className="font-serif text-3xl font-bold text-[#8b1a4a] mb-1">{stat.value}</div>
+                <div className="text-xs text-[#6b7280] font-medium tracking-wide uppercase">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -173,13 +170,13 @@ export default function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
-            <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Jess&apos;s Listings</div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">Personally Listed by Jess</h2>
-            <p className="text-stone-500 mt-2 text-sm max-w-md">
+            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Jess&apos;s Listings</div>
+            <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold">Personally Listed by Jess</h2>
+            <p className="text-[#6b7280] mt-2 text-sm max-w-md">
               Every property Jess personally lists is elevated — from photography to pricing strategy.
             </p>
           </div>
-          <Link href="/listings" className="text-[#c1613a] hover:text-[#a8502f] font-semibold text-sm flex items-center gap-1 flex-shrink-0 transition-colors">
+          <Link href="/listings" className="text-[#8b1a4a] hover:text-[#6d1439] font-semibold text-sm flex items-center gap-1 flex-shrink-0 transition-colors">
             View All Listings →
           </Link>
         </div>
@@ -192,7 +189,7 @@ export default function Home() {
 
         <div className="text-center mt-10">
           <Link href="/listings"
-             className="inline-flex items-center gap-2 border border-stone-200 hover:border-[#c1613a] text-stone-700 hover:text-[#c1613a] font-semibold px-7 py-3 rounded-full text-sm transition-all">
+             className="inline-flex items-center gap-2 border border-stone-200 hover:border-[#8b1a4a] text-[#0d0d0d] hover:text-[#8b1a4a] font-semibold px-7 py-3 rounded-sm text-sm transition-all">
             View All Jess&apos;s Listings →
           </Link>
         </div>
@@ -200,18 +197,16 @@ export default function Home() {
 
       {/* ── ABOUT JESS MINI ───────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Photo placeholder */}
           <div className="flex items-center justify-center">
             <div className="relative">
-              <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-br from-stone-300 via-stone-200 to-amber-100 flex items-center justify-center shadow-lg">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#d4a574] to-[#c1613a] flex items-center justify-center shadow-lg">
-                  <span className="font-serif text-4xl font-bold text-white">JO</span>
-                </div>
+              <div className="w-64 h-64 sm:w-80 sm:h-80 bg-[#0d0d0d] border border-[#c9a84c] flex items-center justify-center">
+                <span className="font-serif text-6xl font-bold text-[#c9a84c]">JO</span>
               </div>
               {/* Accent badge */}
-              <div className="absolute -bottom-4 -right-4 bg-[#c1613a] text-white rounded-xl px-4 py-3 shadow-lg">
-                <div className="text-xs font-semibold opacity-80 uppercase tracking-wider">Local Expert</div>
+              <div className="absolute -bottom-4 -right-4 bg-[#8b1a4a] text-white px-4 py-3">
+                <div className="text-xs font-semibold opacity-80 uppercase tracking-widest">Local Expert</div>
                 <div className="font-serif font-bold text-sm">Southern Utah</div>
               </div>
             </div>
@@ -219,27 +214,27 @@ export default function Home() {
 
           {/* Text */}
           <div>
-            <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-3">Your Southern Utah Expert</div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold mb-5">Meet Jess Orvin</h2>
-            <p className="text-stone-600 leading-relaxed mb-4">
+            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-4">Your Southern Utah Expert</div>
+            <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold mb-6">Meet Jess Orvin</h2>
+            <p className="text-[#6b7280] leading-relaxed mb-4">
               Born and raised in Southern Utah, Jess knows this landscape the way only a true local can. She knows which neighborhoods are on the rise, which canyon views are worth every penny, and why the people who move here never want to leave.
             </p>
-            <p className="text-stone-600 leading-relaxed mb-8">
+            <p className="text-[#6b7280] leading-relaxed mb-8">
               Known for her authentic lifestyle brand on TikTok and Instagram, Jess brings the same eye for beauty and storytelling to every listing she touches. She doesn&apos;t just sell homes — she tells their story.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/about"
-                 className="inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-stone-800 text-white font-semibold px-6 py-3 rounded-full text-sm transition-colors">
+                 className="inline-flex items-center justify-center gap-2 bg-[#0d0d0d] hover:bg-[#1a1a1a] text-white font-semibold px-6 py-3 rounded-sm text-sm transition-colors">
                 Learn More About Jess →
               </Link>
               <div className="flex items-center gap-3">
                 <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c1613a] text-stone-600 hover:text-[#c1613a] font-semibold px-4 py-3 rounded-full text-sm transition-colors">
+                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c9a84c] text-[#6b7280] hover:text-[#0d0d0d] font-semibold px-4 py-3 rounded-sm text-sm transition-colors">
                   <TikTokIcon className="w-3.5 h-3.5" />
                   {socials.jessTikTok.handle}
                 </a>
                 <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c1613a] text-stone-600 hover:text-[#c1613a] font-semibold px-4 py-3 rounded-full text-sm transition-colors">
+                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c9a84c] text-[#6b7280] hover:text-[#0d0d0d] font-semibold px-4 py-3 rounded-sm text-sm transition-colors">
                   <InstagramIcon className="w-3.5 h-3.5" />
                   {socials.jessInstagram.handle}
                 </a>
@@ -252,13 +247,11 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           BRAND TRANSITION DIVIDER
       ══════════════════════════════════════════════ */}
-      <section className="relative py-14 px-4 overflow-hidden" style={{ backgroundColor: "#f3f0eb" }}>
-        {/* Decorative lines */}
-        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-stone-200" />
+      <section className="relative py-14 px-4 overflow-hidden bg-stone-50 border-y border-stone-100">
         <div className="relative z-10 flex items-center justify-center gap-6 max-w-4xl mx-auto">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-stone-300" />
-          <div className="bg-[#f3f0eb] px-6 text-center">
-            <p className="text-stone-500 text-xs font-semibold tracking-widest uppercase mb-1.5">Jess & Christina are co-founders of</p>
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-stone-200" />
+          <div className="bg-stone-50 px-6 text-center">
+            <p className="text-[#9ca3af] text-xs font-semibold tracking-widest uppercase mb-2">Jess & Christina are co-founders of</p>
             <div className="flex items-center gap-3">
               <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
               <span className="font-serif text-lg font-bold" style={{ color: "#1a2744" }}>
@@ -266,9 +259,9 @@ export default function Home() {
               </span>
               <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
             </div>
-            <p className="text-stone-400 text-xs mt-1.5">Utah&apos;s Premier Real Estate Team</p>
+            <p className="text-[#9ca3af] text-xs mt-1.5">Utah&apos;s Premier Real Estate Team</p>
           </div>
-          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-stone-300" />
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-stone-200" />
         </div>
       </section>
 
@@ -280,10 +273,9 @@ export default function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#1a2744" }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            {/* Team logo/wordmark */}
             <div className="inline-flex items-center gap-3 mb-6">
               <div className="w-10 h-px" style={{ backgroundColor: "#c9a84c" }} />
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center border-2" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
+              <div className="w-12 h-12 flex items-center justify-center border-2" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
                 <span className="font-serif text-lg font-bold" style={{ color: "#c9a84c" }}>UE</span>
               </div>
               <div className="w-10 h-px" style={{ backgroundColor: "#c9a84c" }} />
@@ -330,7 +322,7 @@ export default function Home() {
               { initials: "KJ", name: "Kayla Jensen", title: "Real Estate Agent" },
             ].map((member, i) => (
               <div key={member.name} className="flex flex-col items-center text-center">
-                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mb-3 shadow-lg border ${i < 2 ? "border-yellow-600/40" : "border-white/10"}`}
+                <div className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center mb-3 border ${i < 2 ? "border-yellow-600/40" : "border-white/10"}`}
                      style={{ backgroundColor: i < 2 ? "rgba(201,168,76,0.2)" : "rgba(255,255,255,0.08)" }}>
                   <span className="font-serif text-xl font-bold" style={{ color: i < 2 ? "#c9a84c" : "rgba(255,255,255,0.7)" }}>{member.initials}</span>
                 </div>
@@ -342,7 +334,7 @@ export default function Home() {
 
           <div className="text-center">
             <Link href="/team"
-               className="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded-full text-sm transition-all border"
+               className="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded-sm text-sm transition-all border"
                style={{ backgroundColor: "#c9a84c", borderColor: "#c9a84c", color: "#1a2744" }}>
               Meet the Full Team →
             </Link>
@@ -386,25 +378,25 @@ export default function Home() {
       {/* ── TESTIMONIALS ─────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Client Stories</div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">What Clients Say About Jess</h2>
+          <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Client Stories</div>
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold">What Clients Say About Jess</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <div key={i} className="bg-white rounded-2xl p-7 shadow-sm border border-stone-100 flex flex-col">
+            <div key={i} className="bg-white border border-stone-200 p-7 flex flex-col">
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: 5 }).map((_, s) => (
-                  <svg key={s} className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg key={s} className="w-4 h-4 text-[#c9a84c]" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                   </svg>
                 ))}
               </div>
-              <p className="text-stone-600 text-sm leading-relaxed flex-1 mb-5 italic">&ldquo;{t.quote}&rdquo;</p>
+              <p className="text-[#6b7280] text-sm leading-relaxed flex-1 mb-5 italic">&ldquo;{t.quote}&rdquo;</p>
               <div>
-                <div className="font-semibold text-stone-900 text-sm">{t.name}</div>
-                <div className="text-[#c1613a] text-xs mt-0.5">{t.location}</div>
+                <div className="font-semibold text-[#0d0d0d] text-sm">{t.name}</div>
+                <div className="text-[#c9a84c] text-xs mt-0.5 font-medium tracking-wide">{t.location}</div>
               </div>
             </div>
           ))}
@@ -412,38 +404,39 @@ export default function Home() {
       </section>
 
       {/* ── VIDEOS ────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#f3f0eb" }}>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d]">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Market Insights</div>
-              <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold">Jess&apos;s Latest Videos</h2>
-              <p className="text-stone-500 mt-2 text-sm">Market updates, neighborhood guides, and buyer/seller tips — straight from Jess.</p>
+              <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Market Insights</div>
+              <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold">Jess&apos;s Latest Videos</h2>
+              <p className="text-white/50 mt-2 text-sm">Market updates, neighborhood guides, and buyer/seller tips — straight from Jess.</p>
             </div>
-            <Link href="/videos" className="text-[#c1613a] hover:text-[#a8502f] font-semibold text-sm flex-shrink-0 transition-colors">
+            <Link href="/videos" className="text-[#c9a84c] hover:text-white font-semibold text-sm flex-shrink-0 transition-colors">
               View All Videos →
             </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {videos.map((video, i) => (
-              <div key={i} className="bg-stone-900 rounded-2xl overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
-                <div className="relative h-44 bg-gradient-to-br from-stone-800 via-orange-950 to-stone-900 flex items-center justify-center">
-                  <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                    <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <div key={i} className="bg-[#111111] border border-white/10 overflow-hidden group cursor-pointer hover:border-[#c9a84c]/40 transition-colors">
+                <div className="relative h-44 bg-gradient-to-br from-[#111111] to-[#1a1a1a] flex items-center justify-center">
+                  {/* Gold play button */}
+                  <div className="w-14 h-14 bg-[#c9a84c] flex items-center justify-center group-hover:bg-white transition-colors">
+                    <svg className="w-6 h-6 text-[#0d0d0d] ml-1" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
                   </div>
                   <div className="absolute top-3 left-3">
-                    <span className="text-[10px] font-semibold bg-[#c1613a] text-white px-2 py-0.5 rounded-full">{video.topic}</span>
+                    <span className="text-[10px] font-semibold bg-[#8b1a4a] text-white px-2 py-0.5 rounded-sm">{video.topic}</span>
                   </div>
                   <div className="absolute bottom-3 right-3">
-                    <span className="text-xs text-white/60 bg-black/40 px-2 py-0.5 rounded">{video.duration}</span>
+                    <span className="text-xs text-white/50 bg-black/60 px-2 py-0.5">{video.duration}</span>
                   </div>
                 </div>
                 <div className="p-4">
-                  <p className="text-white text-sm font-medium leading-snug">{video.title}</p>
-                  <p className="text-stone-500 text-xs mt-1">Jess Orvin</p>
+                  <p className="text-white text-sm font-semibold leading-snug">{video.title}</p>
+                  <p className="text-white/30 text-xs mt-1">Jess Orvin</p>
                 </div>
               </div>
             ))}
@@ -451,7 +444,7 @@ export default function Home() {
 
           <div className="text-center mt-8">
             <Link href="/videos"
-               className="inline-flex items-center gap-2 bg-stone-900 hover:bg-stone-800 text-white font-semibold px-7 py-3 rounded-full text-sm transition-colors">
+               className="inline-flex items-center gap-2 border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-7 py-3 rounded-sm text-sm transition-colors">
               Watch on YouTube →
             </Link>
           </div>
@@ -461,26 +454,26 @@ export default function Home() {
       {/* ── FOLLOW JESS / SOCIAL ──────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-10">
-          <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-2">Stay Connected</div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-bold mb-3">Follow Jess</h2>
-          <p className="text-stone-500 text-sm max-w-md mx-auto">
+          <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Stay Connected</div>
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold mb-3">Follow Jess</h2>
+          <p className="text-[#6b7280] text-sm max-w-md mx-auto">
             Behind-the-scenes listings, market tips, and Southern Utah life — on TikTok and Instagram.
           </p>
           <div className="flex items-center justify-center gap-6 mt-6">
             <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 text-stone-600 hover:text-[#c1613a] font-semibold text-sm transition-colors group">
+               className="flex items-center gap-2 text-[#0d0d0d] hover:text-[#8b1a4a] font-semibold text-sm transition-colors group">
               <TikTokIcon className="w-5 h-5" />
               <div className="text-left">
                 <div className="leading-tight">{socials.jessTikTok.handle}</div>
-                <div className="text-[10px] text-stone-400 group-hover:text-[#c1613a]/60 font-normal">TikTok</div>
+                <div className="text-[10px] text-[#9ca3af] font-normal">TikTok</div>
               </div>
             </a>
             <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 text-stone-600 hover:text-[#c1613a] font-semibold text-sm transition-colors group">
+               className="flex items-center gap-2 text-[#0d0d0d] hover:text-[#8b1a4a] font-semibold text-sm transition-colors group">
               <InstagramIcon className="w-5 h-5" />
               <div className="text-left">
                 <div className="leading-tight">{socials.jessInstagram.handle}</div>
-                <div className="text-[10px] text-stone-400 group-hover:text-[#c1613a]/60 font-normal">Instagram</div>
+                <div className="text-[10px] text-[#9ca3af] font-normal">Instagram</div>
               </div>
             </a>
           </div>
@@ -489,13 +482,11 @@ export default function Home() {
         {/* Social grid placeholder */}
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className={`aspect-square rounded-xl overflow-hidden bg-gradient-to-br ${
-              i % 3 === 0 ? "from-orange-900 via-red-800 to-stone-900" :
-              i % 3 === 1 ? "from-stone-700 via-amber-800 to-orange-900" :
-              "from-amber-800 via-orange-700 to-red-900"
-            } flex items-center justify-center group cursor-pointer hover:opacity-90 transition-opacity`}>
+            <div key={i} className={`aspect-square overflow-hidden bg-[#0d0d0d] border ${
+              i % 2 === 0 ? "border-[#c9a84c]/20" : "border-white/5"
+            } flex items-center justify-center group cursor-pointer hover:border-[#c9a84c]/60 transition-colors`}>
               <div className="text-center p-2">
-                <div className="text-white/30 text-[10px] font-medium">@jessorvin</div>
+                <div className="text-white/20 text-[10px] font-medium tracking-widest uppercase">@jessorvin</div>
               </div>
             </div>
           ))}
@@ -503,29 +494,33 @@ export default function Home() {
 
         <div className="text-center mt-6">
           <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-             className="text-stone-500 hover:text-[#c1613a] text-sm font-medium transition-colors">
+             className="text-[#6b7280] hover:text-[#8b1a4a] text-sm font-medium transition-colors">
             View on Instagram →
           </a>
         </div>
       </section>
 
       {/* ── CTA BANNER ────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-stone-900 via-stone-800 to-orange-950">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d]">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="text-xs font-semibold text-[#d4a574] tracking-widest uppercase mb-4">Ready to Make a Move?</div>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="w-12 h-px bg-[#c9a84c]" />
+            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Ready to Make a Move?</span>
+            <div className="w-12 h-px bg-[#c9a84c]" />
+          </div>
           <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold mb-5">
             Let&apos;s Find Your Place in Southern Utah
           </h2>
-          <p className="text-white/70 mb-10 max-w-xl mx-auto">
+          <p className="text-white/60 mb-10 max-w-xl mx-auto">
             Whether you&apos;re buying your first home or selling a luxury estate, Jess is ready to guide you every step of the way — backed by the full Utah&apos;s Elevated Real Estate team.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/listings"
-               className="bg-[#c1613a] hover:bg-[#a8502f] text-white font-semibold px-8 py-4 rounded-full text-base transition-all shadow-lg hover:shadow-xl">
+               className="bg-[#8b1a4a] hover:bg-[#6d1439] text-white font-semibold px-8 py-4 rounded-sm text-base transition-all">
               Browse All Listings
             </Link>
             <Link href="/contact"
-               className="border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-full text-base transition-all">
+               className="border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-8 py-4 rounded-sm text-base transition-all">
               Contact Jess
             </Link>
           </div>

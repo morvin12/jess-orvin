@@ -69,25 +69,32 @@ function ListingsContent() {
   const hasFilters = priceRange !== 0 || minBeds !== 0 || selectedCity !== "" || selectedStatus !== "";
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#faf8f5" }}>
+    <div className="min-h-screen bg-white">
       <Navbar />
       <LeadModal listing={selectedListing} onClose={() => setSelectedListing(null)} />
 
       {/* ── HERO ────────────────────────────────────── */}
-      <div className="pt-20 lg:pt-24 bg-gradient-to-br from-stone-900 via-stone-800 to-orange-950">
+      <div className="pt-20 lg:pt-24 bg-[#0d0d0d]">
+        <div className="h-px bg-[#c9a84c] opacity-60" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="text-xs font-semibold text-[#d4a574] tracking-widest uppercase mb-3">Southern Utah Properties</div>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-px bg-[#c9a84c]" />
+            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Southern Utah Properties</span>
+          </div>
           <h1 className="font-serif text-4xl sm:text-5xl text-white font-bold mb-3">
             Find Your Home
           </h1>
-          <p className="text-stone-400 text-base max-w-xl">
+          <p className="text-white/50 text-base max-w-xl">
             Hand-selected properties across St. George, Ivins, Santa Clara, Washington, Hurricane, and beyond — listed by Jess Orvin and the Utah&apos;s Elevated Real Estate team.
           </p>
         </div>
       </div>
 
+      {/* Gold accent */}
+      <div className="h-0.5 bg-[#c9a84c]" />
+
       {/* ── TABS + FILTERS ─────────────────────────── */}
-      <div className="bg-white border-b border-stone-100 sticky top-16 lg:top-20 z-40 shadow-sm">
+      <div className="bg-white border-b border-stone-100 sticky top-16 lg:top-20 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Tabs */}
           <div className="flex items-center gap-0 border-b border-stone-100 -mb-px">
@@ -95,13 +102,13 @@ function ListingsContent() {
               onClick={() => setActiveTab("jess")}
               className={`px-5 py-4 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${
                 activeTab === "jess"
-                  ? "border-[#c1613a] text-[#c1613a]"
-                  : "border-transparent text-stone-500 hover:text-stone-800"
+                  ? "border-[#8b1a4a] text-[#8b1a4a]"
+                  : "border-transparent text-[#6b7280] hover:text-[#0d0d0d]"
               }`}
             >
               Jess&apos;s Listings
-              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                activeTab === "jess" ? "bg-[#c1613a]/10 text-[#c1613a]" : "bg-stone-100 text-stone-500"
+              <span className={`text-xs px-2 py-0.5 rounded-sm font-medium ${
+                activeTab === "jess" ? "bg-[#8b1a4a]/10 text-[#8b1a4a]" : "bg-stone-100 text-[#6b7280]"
               }`}>
                 {jessCount}
               </span>
@@ -110,13 +117,13 @@ function ListingsContent() {
               onClick={() => setActiveTab("team")}
               className={`px-5 py-4 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${
                 activeTab === "team"
-                  ? "border-[#c1613a] text-[#c1613a]"
-                  : "border-transparent text-stone-500 hover:text-stone-800"
+                  ? "border-[#8b1a4a] text-[#8b1a4a]"
+                  : "border-transparent text-[#6b7280] hover:text-[#0d0d0d]"
               }`}
             >
               Team Listings
-              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                activeTab === "team" ? "bg-[#c1613a]/10 text-[#c1613a]" : "bg-stone-100 text-stone-500"
+              <span className={`text-xs px-2 py-0.5 rounded-sm font-medium ${
+                activeTab === "team" ? "bg-[#8b1a4a]/10 text-[#8b1a4a]" : "bg-stone-100 text-[#6b7280]"
               }`}>
                 {teamCount}
               </span>
@@ -129,7 +136,7 @@ function ListingsContent() {
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(Number(e.target.value))}
-              className="border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-700 bg-white focus:outline-none focus:border-[#c1613a] cursor-pointer"
+              className="border border-stone-200 rounded-sm px-3 py-2 text-sm text-[#0d0d0d] bg-white focus:outline-none focus:border-[#8b1a4a] cursor-pointer"
             >
               {priceRanges.map((r, i) => (
                 <option key={i} value={i}>{r.label}</option>
@@ -140,7 +147,7 @@ function ListingsContent() {
             <select
               value={minBeds}
               onChange={(e) => setMinBeds(Number(e.target.value))}
-              className="border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-700 bg-white focus:outline-none focus:border-[#c1613a] cursor-pointer"
+              className="border border-stone-200 rounded-sm px-3 py-2 text-sm text-[#0d0d0d] bg-white focus:outline-none focus:border-[#8b1a4a] cursor-pointer"
             >
               {bedOptions.map((b) => (
                 <option key={b.value} value={b.value}>
@@ -153,7 +160,7 @@ function ListingsContent() {
             <select
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
-              className="border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-700 bg-white focus:outline-none focus:border-[#c1613a] cursor-pointer"
+              className="border border-stone-200 rounded-sm px-3 py-2 text-sm text-[#0d0d0d] bg-white focus:outline-none focus:border-[#8b1a4a] cursor-pointer"
             >
               <option value="">All Cities</option>
               {cities.map((c) => (
@@ -165,7 +172,7 @@ function ListingsContent() {
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-700 bg-white focus:outline-none focus:border-[#c1613a] cursor-pointer"
+              className="border border-stone-200 rounded-sm px-3 py-2 text-sm text-[#0d0d0d] bg-white focus:outline-none focus:border-[#8b1a4a] cursor-pointer"
             >
               <option value="">All Status</option>
               <option value="Active">Active</option>
@@ -177,7 +184,7 @@ function ListingsContent() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-              className="border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-700 bg-white focus:outline-none focus:border-[#c1613a] cursor-pointer"
+              className="border border-stone-200 rounded-sm px-3 py-2 text-sm text-[#0d0d0d] bg-white focus:outline-none focus:border-[#8b1a4a] cursor-pointer"
             >
               <option value="newest">Sort: Newest</option>
               <option value="price-asc">Price: Low → High</option>
@@ -188,14 +195,14 @@ function ListingsContent() {
             {hasFilters && (
               <button
                 onClick={() => { setPriceRange(0); setMinBeds(0); setSelectedCity(""); setSelectedStatus(""); }}
-                className="text-xs text-stone-400 hover:text-[#c1613a] transition-colors underline underline-offset-2 ml-1"
+                className="text-xs text-[#9ca3af] hover:text-[#8b1a4a] transition-colors underline underline-offset-2 ml-1"
               >
                 Clear Filters
               </button>
             )}
 
             {/* Result count */}
-            <div className="ml-auto text-xs text-stone-400">
+            <div className="ml-auto text-xs text-[#9ca3af]">
               {filteredListings.length} {filteredListings.length === 1 ? "listing" : "listings"}
             </div>
           </div>
@@ -208,22 +215,22 @@ function ListingsContent() {
         <div className="mb-6">
           {activeTab === "jess" ? (
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#c1613a] to-orange-800 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-bold text-white">JO</span>
+              <div className="w-8 h-8 bg-[#0d0d0d] border border-[#c9a84c] flex items-center justify-center flex-shrink-0">
+                <span className="text-xs font-bold text-[#c9a84c]">JO</span>
               </div>
               <div>
-                <div className="font-semibold text-stone-900 text-sm">Jess Orvin&apos;s Listings</div>
-                <div className="text-xs text-stone-400">Co-Founder · Utah&apos;s Elevated Real Estate</div>
+                <div className="font-semibold text-[#0d0d0d] text-sm">Jess Orvin&apos;s Listings</div>
+                <div className="text-xs text-[#9ca3af]">Co-Founder · Utah&apos;s Elevated Real Estate</div>
               </div>
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-stone-600 to-stone-800 flex items-center justify-center flex-shrink-0">
-                <span className="text-[9px] font-bold text-white">UER</span>
+              <div className="w-8 h-8 bg-[#0d0d0d] flex items-center justify-center flex-shrink-0" style={{ border: "1px solid rgba(201,168,76,0.3)" }}>
+                <span className="text-[9px] font-bold text-[#c9a84c]">UER</span>
               </div>
               <div>
-                <div className="font-semibold text-stone-900 text-sm">Utah&apos;s Elevated Real Estate — Team Listings</div>
-                <div className="text-xs text-stone-400">Properties listed by our team of specialists</div>
+                <div className="font-semibold text-[#0d0d0d] text-sm">Utah&apos;s Elevated Real Estate — Team Listings</div>
+                <div className="text-xs text-[#9ca3af]">Properties listed by our team of specialists</div>
               </div>
             </div>
           )}
@@ -231,12 +238,12 @@ function ListingsContent() {
 
         {filteredListings.length === 0 ? (
           <div className="text-center py-24">
-            <div className="text-5xl mb-4">🏜️</div>
-            <h3 className="font-serif text-xl text-stone-700 mb-2">No listings match your filters</h3>
-            <p className="text-stone-400 text-sm mb-6">Try adjusting your search — or contact Jess for off-market options.</p>
+            <div className="text-5xl mb-4">🏠</div>
+            <h3 className="font-serif text-xl text-[#0d0d0d] mb-2">No listings match your filters</h3>
+            <p className="text-[#9ca3af] text-sm mb-6">Try adjusting your search — or contact Jess for off-market options.</p>
             <button
               onClick={() => { setPriceRange(0); setMinBeds(0); setSelectedCity(""); setSelectedStatus(""); }}
-              className="bg-[#c1613a] hover:bg-[#a8502f] text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-colors"
+              className="bg-[#8b1a4a] hover:bg-[#6d1439] text-white font-semibold px-6 py-2.5 rounded-sm text-sm transition-colors"
             >
               Clear Filters
             </button>
@@ -251,19 +258,19 @@ function ListingsContent() {
 
         {/* Price range summary */}
         {filteredListings.length > 0 && (
-          <div className="mt-10 pt-8 border-t border-stone-100 flex flex-wrap gap-6 text-sm text-stone-400">
+          <div className="mt-10 pt-8 border-t border-stone-100 flex flex-wrap gap-6 text-sm text-[#9ca3af]">
             <div>
-              <span className="text-stone-600 font-medium">{filteredListings.length}</span> listings shown
+              <span className="text-[#0d0d0d] font-medium">{filteredListings.length}</span> listings shown
             </div>
             <div>
               Price range:{" "}
-              <span className="text-stone-600 font-medium">
+              <span className="text-[#0d0d0d] font-medium">
                 {formatPrice(Math.min(...filteredListings.map((l) => l.price)))} – {formatPrice(Math.max(...filteredListings.map((l) => l.price)))}
               </span>
             </div>
             <div>
               Cities:{" "}
-              <span className="text-stone-600 font-medium">
+              <span className="text-[#0d0d0d] font-medium">
                 {[...new Set(filteredListings.map((l) => l.city))].join(", ")}
               </span>
             </div>
@@ -274,12 +281,12 @@ function ListingsContent() {
       {/* ── CTA ─────────────────────────────────────── */}
       <div className="bg-stone-50 border-t border-stone-100 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h3 className="font-serif text-2xl text-stone-900 font-bold mb-3">Don&apos;t See What You&apos;re Looking For?</h3>
-          <p className="text-stone-500 text-sm mb-6">
+          <h3 className="font-serif text-2xl text-[#0d0d0d] font-bold mb-3">Don&apos;t See What You&apos;re Looking For?</h3>
+          <p className="text-[#6b7280] text-sm mb-6">
             Jess has access to off-market and coming-soon properties across Southern Utah. Tell her what you&apos;re looking for.
           </p>
           <a href="/contact"
-             className="inline-flex items-center gap-2 bg-[#c1613a] hover:bg-[#a8502f] text-white font-semibold px-7 py-3 rounded-full text-sm transition-colors shadow-sm">
+             className="inline-flex items-center gap-2 bg-[#8b1a4a] hover:bg-[#6d1439] text-white font-semibold px-7 py-3 rounded-sm text-sm transition-colors">
             Contact Jess Directly →
           </a>
         </div>
@@ -292,8 +299,8 @@ function ListingsContent() {
 
 export default function ListingsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#faf8f5" }}>
-      <div className="text-stone-400">Loading listings...</div>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="text-[#9ca3af]">Loading listings...</div>
     </div>}>
       <ListingsContent />
     </Suspense>

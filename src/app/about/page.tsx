@@ -28,25 +28,27 @@ const jessStats = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#faf8f5" }}>
+    <div className="min-h-screen bg-white">
       <Navbar />
 
       {/* ══════════════════════════════════════════════════════
-          PART 1: ABOUT JESS — Personal Brand (terracotta/cream)
+          PART 1: ABOUT JESS — Personal Brand
       ══════════════════════════════════════════════════════ */}
 
       {/* ── JESS HERO ─────────────────────────────────────── */}
-      <div className="pt-20 lg:pt-24 bg-gradient-to-br from-stone-900 via-stone-800 to-orange-950">
+      <div className="pt-20 lg:pt-24 bg-[#0d0d0d]">
+        {/* Gold top accent */}
+        <div className="h-px bg-[#c9a84c] opacity-60" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Photo placeholder */}
             <div className="flex-shrink-0">
               <div className="relative">
-                <div className="w-48 h-48 sm:w-64 sm:h-64 rounded-3xl bg-gradient-to-br from-[#d4a574] via-[#c1613a] to-orange-800 flex items-center justify-center shadow-2xl border-4 border-white/10">
-                  <span className="font-serif text-6xl font-bold text-white">JO</span>
+                <div className="w-48 h-48 sm:w-64 sm:h-64 bg-[#111111] border border-[#c9a84c] flex items-center justify-center">
+                  <span className="font-serif text-6xl font-bold text-[#c9a84c]">JO</span>
                 </div>
-                <div className="absolute -bottom-3 -right-3 bg-white text-stone-900 rounded-xl px-3 py-2 shadow-lg">
-                  <div className="text-[10px] font-medium text-stone-500 uppercase tracking-wider">Personal Brand</div>
+                <div className="absolute -bottom-3 -right-3 bg-white text-[#0d0d0d] px-3 py-2">
+                  <div className="text-[10px] font-medium text-[#9ca3af] uppercase tracking-widest">Personal Brand</div>
                   <div className="font-serif font-bold text-xs">Jess Orvin</div>
                 </div>
               </div>
@@ -54,19 +56,22 @@ export default function AboutPage() {
 
             {/* Text */}
             <div>
-              <div className="text-xs font-semibold text-[#d4a574] tracking-widest uppercase mb-3">Your Southern Utah Real Estate Expert</div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-px bg-[#c9a84c]" />
+                <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Your Southern Utah Real Estate Expert</span>
+              </div>
               <h1 className="font-serif text-4xl sm:text-5xl text-white font-bold mb-4">About Jess Orvin</h1>
-              <p className="text-stone-300 text-lg mb-6 max-w-xl leading-relaxed">
+              <p className="text-white/60 text-lg mb-6 max-w-xl leading-relaxed">
                 Southern Utah native. Real estate expert. Lifestyle creator. Your guide to Red Rock Country.
               </p>
               <div className="flex items-center gap-4">
                 <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-                   className="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors">
+                   className="flex items-center gap-2 text-white/50 hover:text-[#c9a84c] text-sm transition-colors">
                   <TikTokIcon className="w-4 h-4" />
                   {socials.jessTikTok.handle}
                 </a>
                 <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-                   className="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors">
+                   className="flex items-center gap-2 text-white/50 hover:text-[#c9a84c] text-sm transition-colors">
                   <InstagramIcon className="w-4 h-4" />
                   {socials.jessInstagram.handle}
                 </a>
@@ -76,14 +81,17 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Gold accent bar */}
+      <div className="h-0.5 w-full bg-[#c9a84c]" />
+
       {/* ── JESS STATS ──────────────────────────────────────── */}
       <div className="bg-white border-b border-stone-100">
-        <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="max-w-5xl mx-auto px-4 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {jessStats.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
-                <div className="font-serif text-3xl font-bold text-[#c1613a] mb-1">{stat.value}</div>
-                <div className="text-xs text-stone-500 font-medium tracking-wide uppercase">{stat.label}</div>
+                <div className="font-serif text-3xl font-bold text-[#8b1a4a] mb-1">{stat.value}</div>
+                <div className="text-xs text-[#6b7280] font-medium tracking-wide uppercase">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -94,9 +102,12 @@ export default function AboutPage() {
 
         {/* ── ABOUT JESS ───────────────────────────────────── */}
         <section className="mb-14">
-          <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-3">Her Story</div>
-          <h2 className="font-serif text-3xl text-stone-900 font-bold mb-6">About Jess</h2>
-          <div className="flex flex-col gap-4 text-stone-600 leading-relaxed">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-6 h-px bg-[#c9a84c]" />
+            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Her Story</div>
+          </div>
+          <h2 className="font-serif text-3xl text-[#0d0d0d] font-bold mb-6">About Jess</h2>
+          <div className="flex flex-col gap-4 text-[#6b7280] leading-relaxed">
             <p>
               Jess Orvin is Southern Utah&apos;s real estate expert — born and raised in the red rock canyons, she knows this landscape the way only a true local can. She knows which neighborhoods are on the rise, which views are worth every penny, and why the people who move here never want to leave.
             </p>
@@ -109,12 +120,22 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* ── GOLD DIVIDER ─────────────────────────────────── */}
+        <div className="flex items-center gap-4 mb-14">
+          <div className="flex-1 h-px bg-stone-100" />
+          <div className="w-2 h-2 bg-[#c9a84c]" style={{ transform: "rotate(45deg)" }} />
+          <div className="flex-1 h-px bg-stone-100" />
+        </div>
+
         {/* ── BEYOND REAL ESTATE ───────────────────────────── */}
         <section className="mb-14">
-          <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-3">The Full Picture</div>
-          <h2 className="font-serif text-2xl text-stone-900 font-bold mb-5">Beyond Real Estate</h2>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-6 h-px bg-[#c9a84c]" />
+            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">The Full Picture</div>
+          </div>
+          <h2 className="font-serif text-2xl text-[#0d0d0d] font-bold mb-5">Beyond Real Estate</h2>
           <div className="flex flex-col sm:flex-row gap-8 items-start">
-            <div className="flex-1 text-stone-600 leading-relaxed flex flex-col gap-4">
+            <div className="flex-1 text-[#6b7280] leading-relaxed flex flex-col gap-4">
               <p>
                 Jess brings the same eye for beauty and detail to everything she does. Known for her lifestyle brand and presence across TikTok and Instagram, she&apos;s built a following of people who appreciate her authentic take on Southern Utah living — the sunsets, the canyon hikes, the hidden gems that only a local knows.
               </p>
@@ -124,12 +145,12 @@ export default function AboutPage() {
             </div>
             <div className="flex-shrink-0 flex flex-col gap-3">
               <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-                 className="flex items-center gap-3 bg-stone-900 hover:bg-stone-800 text-white px-5 py-3 rounded-xl text-sm font-semibold transition-colors">
+                 className="flex items-center gap-3 bg-[#0d0d0d] hover:bg-[#1a1a1a] text-white px-5 py-3 rounded-sm text-sm font-semibold transition-colors">
                 <TikTokIcon className="w-4 h-4" />
                 Follow on TikTok
               </a>
               <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-                 className="flex items-center gap-3 border border-stone-200 hover:border-[#c1613a] text-stone-700 hover:text-[#c1613a] px-5 py-3 rounded-xl text-sm font-semibold transition-colors">
+                 className="flex items-center gap-3 border border-stone-200 hover:border-[#c9a84c] text-[#6b7280] hover:text-[#0d0d0d] px-5 py-3 rounded-sm text-sm font-semibold transition-colors">
                 <InstagramIcon className="w-4 h-4" />
                 Follow on Instagram
               </a>
@@ -138,9 +159,12 @@ export default function AboutPage() {
         </section>
 
         {/* ── CREDENTIALS ──────────────────────────────────── */}
-        <section className="mb-14 bg-stone-50 rounded-2xl p-8 border border-stone-100">
-          <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-3">Credentials</div>
-          <h2 className="font-serif text-2xl text-stone-900 font-bold mb-6">Qualifications</h2>
+        <section className="mb-14 bg-stone-50 p-8 border border-stone-200">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-6 h-px bg-[#c9a84c]" />
+            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Credentials</div>
+          </div>
+          <h2 className="font-serif text-2xl text-[#0d0d0d] font-bold mb-6">Qualifications</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { label: "Utah Real Estate License", detail: "Licensed Realtor, State of Utah" },
@@ -151,14 +175,14 @@ export default function AboutPage() {
               { label: "Digital Marketing Expert", detail: "TikTok, Instagram, targeted ads" },
             ].map((cred) => (
               <div key={cred.label} className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-[#c1613a]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg className="w-3 h-3 text-[#c1613a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <div className="w-5 h-5 bg-[#c9a84c] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg className="w-3 h-3 text-[#0d0d0d]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-stone-900">{cred.label}</div>
-                  <div className="text-xs text-stone-500">{cred.detail}</div>
+                  <div className="text-sm font-semibold text-[#0d0d0d]">{cred.label}</div>
+                  <div className="text-xs text-[#6b7280]">{cred.detail}</div>
                 </div>
               </div>
             ))}
@@ -166,18 +190,23 @@ export default function AboutPage() {
         </section>
 
         {/* ── CTA (Jess personal) ──────────────────────────── */}
-        <section className="bg-gradient-to-br from-stone-900 to-orange-950 rounded-2xl p-8 text-center mb-0">
+        <section className="bg-[#0d0d0d] p-8 text-center mb-0">
+          <div className="flex items-center justify-center gap-4 mb-5">
+            <div className="w-10 h-px bg-[#c9a84c]" />
+            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Work with Jess</span>
+            <div className="w-10 h-px bg-[#c9a84c]" />
+          </div>
           <h2 className="font-serif text-2xl text-white font-bold mb-3">Ready to Work With Jess?</h2>
-          <p className="text-stone-400 text-sm mb-6 max-w-md mx-auto">
+          <p className="text-white/50 text-sm mb-6 max-w-md mx-auto">
             Whether you&apos;re buying your first home or selling a luxury estate in Southern Utah, Jess is ready to guide you every step of the way.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link href="/contact"
-               className="bg-[#c1613a] hover:bg-[#a8502f] text-white font-semibold px-7 py-3 rounded-full text-sm transition-colors shadow-lg">
+               className="bg-[#8b1a4a] hover:bg-[#6d1439] text-white font-semibold px-7 py-3 rounded-sm text-sm transition-colors">
               Contact Jess →
             </Link>
             <Link href="/listings"
-               className="border border-white/20 hover:border-white/50 text-white font-semibold px-7 py-3 rounded-full text-sm transition-colors">
+               className="border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-7 py-3 rounded-sm text-sm transition-colors">
               View Listings
             </Link>
           </div>
@@ -187,11 +216,11 @@ export default function AboutPage() {
       {/* ══════════════════════════════════════════════════════
           BRAND DIVIDER — transition to team brand
       ══════════════════════════════════════════════════════ */}
-      <div className="py-12 px-4" style={{ backgroundColor: "#f3f0eb" }}>
+      <div className="py-12 px-4 bg-stone-50 border-y border-stone-100">
         <div className="max-w-4xl mx-auto flex items-center justify-center gap-6">
           <div className="flex-1 h-px bg-stone-200" />
           <div className="text-center px-4">
-            <p className="text-stone-400 text-xs font-semibold tracking-widest uppercase mb-1.5">Jess is co-founder of</p>
+            <p className="text-[#9ca3af] text-xs font-semibold tracking-widest uppercase mb-2">Jess is co-founder of</p>
             <div className="flex items-center justify-center gap-3">
               <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
               <span className="font-serif text-xl font-bold" style={{ color: "#1a2744" }}>Utah&apos;s Elevated Real Estate</span>
@@ -211,7 +240,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           {/* Brand identifier */}
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center border-2 flex-shrink-0" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
+            <div className="w-12 h-12 flex items-center justify-center border-2 flex-shrink-0" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
               <span className="font-serif text-base font-bold" style={{ color: "#c9a84c" }}>UE</span>
             </div>
             <div>
@@ -259,7 +288,7 @@ export default function AboutPage() {
             <div className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#c9a84c" }}>Our Values</div>
             <div className="flex flex-wrap gap-2">
               {["Elevated Marketing", "Local Expertise", "Client-First Philosophy", "Full Team Support", "Digital-First Strategy", "Honest Guidance"].map((tag) => (
-                <span key={tag} className="text-xs font-medium px-3 py-1.5 rounded-full border" style={{ backgroundColor: "rgba(201,168,76,0.08)", borderColor: "rgba(201,168,76,0.25)", color: "rgba(201,168,76,0.9)" }}>
+                <span key={tag} className="text-xs font-medium px-3 py-1.5 border" style={{ backgroundColor: "rgba(201,168,76,0.08)", borderColor: "rgba(201,168,76,0.25)", color: "rgba(201,168,76,0.9)" }}>
                   {tag}
                 </span>
               ))}
@@ -274,8 +303,8 @@ export default function AboutPage() {
                 { initials: "JO", name: "Jess Orvin", role: "Co-Founder", detail: "Southern Utah native, lifestyle creator, and the driving force behind the team's vision." },
                 { initials: "CC", name: "Christina Childs", role: "Co-Founder", detail: "Operational expert and market strategist who keeps the team running at its absolute best." },
               ].map((founder) => (
-                <div key={founder.name} className="flex items-start gap-4 p-4 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(201,168,76,0.15)" }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 border" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "rgba(201,168,76,0.3)" }}>
+                <div key={founder.name} className="flex items-start gap-4 p-4" style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(201,168,76,0.2)" }}>
+                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 border" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "rgba(201,168,76,0.3)" }}>
                     <span className="font-serif text-base font-bold" style={{ color: "#c9a84c" }}>{founder.initials}</span>
                   </div>
                   <div>
@@ -291,12 +320,12 @@ export default function AboutPage() {
           {/* CTA */}
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
             <Link href="/team"
-               className="inline-flex items-center gap-2 font-semibold px-7 py-3 rounded-full text-sm transition-all"
+               className="inline-flex items-center gap-2 font-semibold px-7 py-3 rounded-sm text-sm transition-all"
                style={{ backgroundColor: "#c9a84c", color: "#1a2744" }}>
               Meet the Full Team →
             </Link>
             <a href={socials.teamInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-2 border font-semibold px-7 py-3 rounded-full text-sm transition-all"
+               className="inline-flex items-center gap-2 border font-semibold px-7 py-3 rounded-sm text-sm transition-all"
                style={{ borderColor: "rgba(201,168,76,0.4)", color: "#c9a84c" }}>
               <InstagramIcon className="w-4 h-4" />
               {socials.teamInstagram.handle}

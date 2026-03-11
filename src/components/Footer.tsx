@@ -19,15 +19,18 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-stone-900 text-stone-300">
+    <footer className="bg-[#0d0d0d] text-stone-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
 
           {/* Brand column */}
           <div className="md:col-span-2">
             <div className="mb-4">
-              <div className="font-serif text-2xl font-bold text-white tracking-wide mb-0.5">JESS ORVIN</div>
-              <div className="text-xs text-[#d4a574] font-semibold tracking-widest uppercase">Utah&apos;s Elevated Real Estate</div>
+              <div className="font-serif text-2xl font-bold text-white tracking-wide mb-1">JESS ORVIN</div>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-px bg-[#c9a84c]" />
+                <div className="text-xs text-[#c9a84c] font-semibold tracking-widest uppercase">Utah&apos;s Elevated Real Estate</div>
+              </div>
             </div>
             <p className="text-stone-400 text-sm leading-relaxed max-w-xs mb-6">
               Southern Utah&apos;s premier real estate team. We combine local expertise, elevated marketing, and personal service to help you buy or sell with confidence.
@@ -41,7 +44,7 @@ export default function Footer() {
                   href={socials.jessTikTok.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-stone-400 hover:text-[#c1613a] transition-colors text-sm"
+                  className="flex items-center gap-2 text-stone-400 hover:text-[#c9a84c] transition-colors text-sm"
                   aria-label="Jess on TikTok"
                 >
                   <TikTokIcon className="w-4 h-4" />
@@ -52,7 +55,7 @@ export default function Footer() {
                   href={socials.jessInstagram.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-stone-400 hover:text-[#c1613a] transition-colors text-sm"
+                  className="flex items-center gap-2 text-stone-400 hover:text-[#c9a84c] transition-colors text-sm"
                   aria-label="Jess on Instagram"
                 >
                   <InstagramIcon className="w-4 h-4" />
@@ -68,7 +71,7 @@ export default function Footer() {
                 href={socials.teamInstagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-stone-400 hover:text-[#d4a574] transition-colors text-sm"
+                className="flex items-center gap-2 text-stone-400 hover:text-[#c9a84c] transition-colors text-sm"
                 aria-label="Utah's Elevated Real Estate on Instagram"
               >
                 <InstagramIcon className="w-4 h-4" />
@@ -113,7 +116,7 @@ export default function Footer() {
                 <div className="text-white font-medium text-xs mb-1">Utah&apos;s Elevated Real Estate</div>
                 <div>St. George, Utah 84770</div>
                 <div className="mt-1">
-                  <Link href="/contact" className="text-[#c1613a] hover:text-[#d4a574] transition-colors">
+                  <Link href="/contact" className="text-[#c9a84c] hover:text-white transition-colors">
                     Send a Message →
                   </Link>
                 </div>

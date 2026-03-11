@@ -29,34 +29,38 @@ const videos = [
 ];
 
 const topicColors: Record<string, string> = {
-  "Market Update": "bg-blue-500",
-  "Neighborhood Guide": "bg-emerald-500",
-  "Buyer Tips": "bg-amber-500",
-  "Seller Tips": "bg-purple-500",
-  "Listings Tour": "bg-[#c1613a]",
+  "Market Update": "bg-[#1a2744] text-[#c9a84c]",
+  "Neighborhood Guide": "bg-[#0d0d0d] text-white",
+  "Buyer Tips": "bg-[#c9a84c] text-[#0d0d0d]",
+  "Seller Tips": "bg-[#8b1a4a] text-white",
+  "Listings Tour": "bg-white text-[#0d0d0d]",
 };
 
 export default function VideosPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#faf8f5" }}>
+    <div className="min-h-screen bg-[#0d0d0d]">
       <Navbar />
 
       {/* Hero */}
-      <div className="pt-20 lg:pt-24 bg-gradient-to-br from-stone-900 via-stone-800 to-orange-950">
+      <div className="pt-20 lg:pt-24 bg-[#0d0d0d]">
+        <div className="h-px bg-[#c9a84c] opacity-60" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="text-xs font-semibold text-[#d4a574] tracking-widest uppercase mb-3">Market Intelligence</div>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-px bg-[#c9a84c]" />
+            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Market Intelligence</span>
+          </div>
           <h1 className="font-serif text-4xl sm:text-5xl text-white font-bold mb-3">Videos & Market Insights</h1>
-          <p className="text-stone-400 text-base max-w-xl mb-6">
+          <p className="text-white/50 text-base max-w-xl mb-6">
             Southern Utah market updates, neighborhood guides, and real estate tips from Jess — straight from the source.
           </p>
           <div className="flex items-center gap-5">
             <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors">
+               className="flex items-center gap-2 text-white/40 hover:text-[#c9a84c] text-sm transition-colors">
               <TikTokIcon className="w-4 h-4" />
               {socials.jessTikTok.handle}
             </a>
             <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors">
+               className="flex items-center gap-2 text-white/40 hover:text-[#c9a84c] text-sm transition-colors">
               <InstagramIcon className="w-4 h-4" />
               {socials.jessInstagram.handle}
             </a>
@@ -67,87 +71,83 @@ export default function VideosPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         {/* Featured / first video larger */}
         <div className="mb-12">
-          <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-5">Latest Video</div>
-          <div className="bg-stone-900 rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
-            <div className="relative h-64 lg:h-auto bg-gradient-to-br from-stone-800 via-orange-950 to-stone-900 flex items-center justify-center min-h-[280px]">
-              <div className="absolute inset-0 overflow-hidden opacity-20">
-                <svg viewBox="0 0 600 400" className="absolute bottom-0 w-full" preserveAspectRatio="xMidYMax slice">
-                  <path d="M0 400 L0 240 Q80 180 160 210 L220 130 L300 170 Q380 100 460 140 L530 80 L600 110 L600 400 Z" fill="white"/>
-                </svg>
-              </div>
-              <div className="relative z-10 w-20 h-20 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-5">Latest Video</div>
+          <div className="bg-[#111111] border border-white/10 overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+            <div className="relative h-64 lg:h-auto bg-[#0a0a0a] flex items-center justify-center min-h-[280px]">
+              {/* Gold play button */}
+              <div className="relative z-10 w-20 h-20 bg-[#c9a84c] flex items-center justify-center hover:bg-white transition-colors cursor-pointer group">
+                <svg className="w-8 h-8 text-[#0d0d0d] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </div>
               <div className="absolute top-4 left-4">
-                <span className={`text-xs font-bold px-2.5 py-1 rounded-full text-white ${topicColors[videos[0].topic] || "bg-stone-600"}`}>
+                <span className={`text-xs font-bold px-2.5 py-1 rounded-sm ${topicColors[videos[0].topic] || "bg-stone-600 text-white"}`}>
                   {videos[0].topic}
                 </span>
               </div>
-              <div className="absolute bottom-4 right-4 text-sm text-white/60 bg-black/40 px-2 py-1 rounded">
+              <div className="absolute bottom-4 right-4 text-sm text-white/40 bg-black/60 px-2 py-1">
                 {videos[0].duration}
               </div>
             </div>
             <div className="p-7 flex flex-col justify-center">
-              <div className="text-[#d4a574] text-xs font-semibold uppercase tracking-wider mb-2">{videos[0].month}</div>
+              <div className="text-[#c9a84c] text-xs font-semibold uppercase tracking-widest mb-2">{videos[0].month}</div>
               <h2 className="font-serif text-2xl text-white font-bold mb-3">{videos[0].title}</h2>
-              <p className="text-stone-400 text-sm leading-relaxed mb-5">{videos[0].desc}</p>
+              <p className="text-white/50 text-sm leading-relaxed mb-5">{videos[0].desc}</p>
               <div className="flex items-center gap-3">
-                <span className="text-stone-500 text-xs">{videos[0].views} views</span>
-                <span className="text-stone-700">·</span>
-                <span className="text-stone-500 text-xs">Jess Orvin</span>
+                <span className="text-white/30 text-xs">{videos[0].views} views</span>
+                <span className="text-white/20">·</span>
+                <span className="text-white/30 text-xs">Jess Orvin</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* All videos grid */}
-        <div className="text-xs font-semibold text-[#c1613a] tracking-widest uppercase mb-5">All Videos</div>
+        <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-5">All Videos</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos.slice(1).map((video, i) => (
-            <div key={i} className="bg-stone-900 rounded-2xl overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
-              <div className="relative h-44 bg-gradient-to-br from-stone-800 via-orange-950 to-stone-900 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 overflow-hidden opacity-15">
-                  <svg viewBox="0 0 300 180" className="absolute bottom-0 w-full" preserveAspectRatio="xMidYMax slice">
-                    <path d="M0 180 L0 110 Q40 80 80 95 L115 55 L150 75 Q185 45 225 60 L265 30 L300 50 L300 180 Z" fill="white"/>
-                  </svg>
-                </div>
-                <div className="relative z-10 w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                  <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div key={i} className="bg-[#111111] border border-white/10 overflow-hidden group cursor-pointer hover:border-[#c9a84c]/30 transition-colors">
+              <div className="relative h-44 bg-[#0a0a0a] flex items-center justify-center overflow-hidden">
+                {/* Gold play button */}
+                <div className="relative z-10 w-14 h-14 bg-[#c9a84c] flex items-center justify-center group-hover:bg-white transition-colors">
+                  <svg className="w-6 h-6 text-[#0d0d0d] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
                 <div className="absolute top-3 left-3">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full text-white ${topicColors[video.topic] || "bg-stone-600"}`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-sm ${topicColors[video.topic] || "bg-stone-600 text-white"}`}>
                     {video.topic}
                   </span>
                 </div>
-                <div className="absolute bottom-3 right-3 text-xs text-white/60 bg-black/40 px-2 py-0.5 rounded">
+                <div className="absolute bottom-3 right-3 text-xs text-white/30 bg-black/60 px-2 py-0.5">
                   {video.duration}
                 </div>
               </div>
               <div className="p-4">
-                <div className="text-[#d4a574] text-[10px] font-semibold uppercase tracking-wider mb-1">{video.month}</div>
+                <div className="text-[#c9a84c] text-[10px] font-semibold uppercase tracking-widest mb-1">{video.month}</div>
                 <p className="text-white text-sm font-semibold leading-snug mb-2">{video.title}</p>
-                <p className="text-stone-500 text-xs leading-relaxed mb-3 line-clamp-2">{video.desc}</p>
-                <div className="text-stone-600 text-xs">{video.views} views · Jess Orvin</div>
+                <p className="text-white/40 text-xs leading-relaxed mb-3 line-clamp-2">{video.desc}</p>
+                <div className="text-white/25 text-xs">{video.views} views · Jess Orvin</div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Social CTA */}
-        <div className="mt-14 bg-stone-900 rounded-2xl p-8 text-center">
-          <div className="text-[#d4a574] text-xs font-semibold uppercase tracking-wider mb-3">Never Miss a Video</div>
+        <div className="mt-14 bg-[#111111] border border-[#c9a84c]/20 p-8 text-center">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="w-10 h-px bg-[#c9a84c]" />
+            <span className="text-[#c9a84c] text-xs font-semibold uppercase tracking-widest">Never Miss a Video</span>
+            <div className="w-10 h-px bg-[#c9a84c]" />
+          </div>
           <h2 className="font-serif text-2xl text-white font-bold mb-3">Follow Jess for Weekly Content</h2>
-          <p className="text-stone-400 text-sm mb-6 max-w-md mx-auto">
+          <p className="text-white/40 text-sm mb-6 max-w-md mx-auto">
             Market updates, neighborhood tours, and real estate tips — posted every week across TikTok and Instagram.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 bg-white hover:bg-stone-100 text-stone-900 font-semibold px-6 py-3 rounded-full text-sm transition-colors">
+               className="flex items-center gap-2 bg-white hover:bg-stone-100 text-[#0d0d0d] font-semibold px-6 py-3 rounded-sm text-sm transition-colors">
               <TikTokIcon className="w-4 h-4" />
               Follow on TikTok
             </a>
             <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 border border-stone-700 hover:border-[#d4a574] text-stone-300 hover:text-[#d4a574] font-semibold px-6 py-3 rounded-full text-sm transition-all">
+               className="flex items-center gap-2 border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-6 py-3 rounded-sm text-sm transition-all">
               <InstagramIcon className="w-4 h-4" />
               Follow on Instagram
             </a>
@@ -156,9 +156,9 @@ export default function VideosPage() {
 
         {/* Also search listings */}
         <div className="mt-8 text-center">
-          <p className="text-stone-400 text-sm mb-3">Saw a property in one of Jess&apos;s videos?</p>
+          <p className="text-white/30 text-sm mb-3">Saw a property in one of Jess&apos;s videos?</p>
           <Link href="/listings"
-             className="inline-flex items-center gap-1.5 text-[#c1613a] hover:text-[#a8502f] font-semibold text-sm transition-colors">
+             className="inline-flex items-center gap-1.5 text-[#c9a84c] hover:text-white font-semibold text-sm transition-colors">
             Browse All Listings →
           </Link>
         </div>
