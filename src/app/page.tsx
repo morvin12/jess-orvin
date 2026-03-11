@@ -4,27 +4,42 @@ import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ListingCard from "@/components/ListingCard";
 import LeadModal from "@/components/LeadModal";
-import { type Listing, jessListings, teamListings } from "@/lib/listings";
+import { type Listing, jessListings, teamListings, formatPrice } from "@/lib/listings";
 import { socials } from "@/lib/socials";
 
+/* ── Icons ───────────────────────────────────────────────── */
 function TikTokIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z" />
     </svg>
   );
 }
-
 function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    </svg>
+  );
+}
+function SearchIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <circle cx="11" cy="11" r="8" />
+      <path d="M21 21l-4.35-4.35" />
+    </svg>
+  );
+}
+function ArrowRight({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
     </svg>
   );
 }
 
+/* ── Data ────────────────────────────────────────────────── */
 const testimonials = [
   {
     quote: "Jess made finding our home in St. George feel effortless. She knew every neighborhood, every price point, and never made us feel rushed. We got exactly what we wanted.",
@@ -49,478 +64,670 @@ const videos = [
   { title: "5 Things I Wish I Knew Before Buying in Southern Utah", duration: "9:47", topic: "Buyer Tips" },
 ];
 
+/* ── Reusable: thin gold divider ────────────────────────── */
+function Divider() {
+  return <div className="gold-divider" />;
+}
+
+/* ── Reusable: section label ────────────────────────────── */
+function Label({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[#c9a84c] text-[10px] tracking-[0.35em] uppercase mb-5">
+      {children}
+    </p>
+  );
+}
+
+/* ── Homepage listing row ────────────────────────────────── */
+function ListingRow({
+  listing,
+  onView,
+}: {
+  listing: Listing;
+  onView: (l: Listing) => void;
+}) {
+  return (
+    <div
+      className="group cursor-pointer"
+      onClick={() => onView(listing)}
+    >
+      {/* Image placeholder */}
+      <div className="listing-img-wrap relative w-full h-64 sm:h-[400px]">
+        <div
+          className={`listing-img-inner absolute inset-0 bg-gradient-to-br ${listing.gradient}`}
+        />
+        {/* Status badge */}
+        <div className="absolute top-5 left-6 z-10">
+          <span
+            className={`text-[9px] tracking-[0.25em] uppercase px-3 py-1.5 font-medium ${
+              listing.status === "Active"
+                ? "bg-[#c9a84c] text-black"
+                : listing.status === "Pending"
+                ? "bg-white/90 text-black"
+                : "bg-black/60 text-white"
+            }`}
+          >
+            {listing.status}
+          </span>
+        </div>
+        {/* Price overlay */}
+        <div className="absolute bottom-5 left-6 z-10">
+          <div className="font-display text-4xl sm:text-5xl text-white font-light leading-none drop-shadow-lg">
+            {formatPrice(listing.price)}
+          </div>
+        </div>
+        {/* Hover dark overlay */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500 z-10" />
+      </div>
+
+      {/* Info row */}
+      <div className="py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-stone-100 group-hover:border-[#c9a84c]/40 transition-colors duration-300">
+        <div>
+          <h3 className="font-display text-xl sm:text-2xl font-light text-black tracking-wide">
+            {listing.address}
+          </h3>
+          <p className="text-stone-400 text-sm mt-0.5 tracking-wide">
+            {listing.city}, {listing.state} · {listing.beds} Beds · {listing.baths} Baths · {listing.sqft.toLocaleString()} sqft
+          </p>
+        </div>
+        <button className="self-start sm:self-auto text-[9px] tracking-[0.22em] uppercase border border-stone-200 text-stone-500 px-5 py-2.5 group-hover:border-[#c9a84c] group-hover:text-[#c9a84c] transition-all duration-300 flex-shrink-0">
+          View Details
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════════════════════════════ */
 export default function Home() {
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
       <LeadModal listing={selectedListing} onClose={() => setSelectedListing(null)} />
 
-      {/* ══════════════════════════════════════════════
-          JESS ORVIN — PERSONAL BRAND
-      ══════════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          HERO — Full viewport, black, animated
+      ══════════════════════════════════════════ */}
+      <section className="hero-bg relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-6">
+        {/* Subtle top/bottom gold lines */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-[#c9a84c] opacity-30" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#c9a84c] opacity-15" />
 
-      {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0d0d0d]">
-        {/* Gold accent lines */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-[#c9a84c] opacity-40" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#c9a84c] opacity-20" />
+        {/* Social links — top right */}
+        <div className="absolute top-24 right-6 lg:right-16 flex flex-col items-end gap-3 hidden lg:flex">
+          <a
+            href={socials.jessTikTok.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-white/30 hover:text-[#c9a84c] text-[9px] tracking-[0.22em] uppercase transition-colors duration-300"
+          >
+            <TikTokIcon className="w-3 h-3" />
+            {socials.jessTikTok.handle}
+          </a>
+          <a
+            href={socials.jessInstagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-white/30 hover:text-[#c9a84c] text-[9px] tracking-[0.22em] uppercase transition-colors duration-300"
+          >
+            <InstagramIcon className="w-3 h-3" />
+            {socials.jessInstagram.handle}
+          </a>
+        </div>
 
-        {/* Subtle grid texture */}
-        <div className="absolute inset-0 opacity-[0.03]"
-          style={{ backgroundImage: "linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
-
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-16">
-          {/* Social icons */}
-          <div className="flex items-center justify-center gap-4 mb-10">
-            <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-1.5 text-white/50 hover:text-[#c9a84c] text-xs transition-colors tracking-wider uppercase">
-              <TikTokIcon className="w-3.5 h-3.5" />
-              <span>{socials.jessTikTok.handle}</span>
-            </a>
-            <span className="text-white/20">·</span>
-            <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-1.5 text-white/50 hover:text-[#c9a84c] text-xs transition-colors tracking-wider uppercase">
-              <InstagramIcon className="w-3.5 h-3.5" />
-              <span>{socials.jessInstagram.handle}</span>
-            </a>
-          </div>
-
-          {/* Eyebrow label */}
-          <div className="inline-flex items-center gap-3 mb-8">
-            <div className="w-12 h-px bg-[#c9a84c]" />
-            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">
-              Southern Utah Real Estate Expert
-            </span>
-            <div className="w-12 h-px bg-[#c9a84c]" />
-          </div>
-
-          {/* H1 */}
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white font-bold leading-none mb-6 tracking-tight">
-            Your Home.<br />
-            <span className="relative inline-block">
-              Your Legacy.
-              <span className="absolute bottom-1 left-0 right-0 h-0.5 bg-[#c9a84c]" />
-            </span>
-          </h1>
-
-          <p className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-3 leading-relaxed">
-            Jess Orvin — Southern Utah&apos;s most trusted real estate expert. Commanding results, unmatched expertise, genuine care.
+        {/* Main content */}
+        <div className="relative z-10 max-w-5xl mx-auto pt-28 pb-20">
+          {/* Eyebrow */}
+          <p className="text-[#c9a84c] text-[10px] tracking-[0.35em] uppercase mb-10">
+            Elevate Your Real Estate Experience With
           </p>
 
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-            <Link href="/listings"
-               className="bg-[#8b1a4a] hover:bg-[#6d1439] text-white font-semibold px-8 py-4 rounded-sm text-base transition-all">
-              Search Listings →
-            </Link>
-            <Link href="/contact"
-               className="border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-8 py-4 rounded-sm text-base transition-all">
-              Work With Jess
-            </Link>
-          </div>
+          {/* Massive heading */}
+          <h1 className="font-display font-light text-white leading-[0.92] tracking-tight mb-12">
+            <span className="block text-[clamp(64px,12vw,130px)]">Jess Orvin</span>
+            <span className="block text-[clamp(48px,9vw,100px)] text-white/80">Southern Utah</span>
+            <span className="block text-[clamp(40px,7vw,84px)] italic text-[#c9a84c]/90">Real Estate</span>
+          </h1>
 
-          {/* Identity mark */}
-          <div className="mt-16 flex items-center justify-center">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-20 h-20 bg-[#111111] border border-[#c9a84c] flex items-center justify-center">
-                <span className="font-serif text-2xl font-bold text-[#c9a84c]">JO</span>
-              </div>
-              <div className="text-center">
-                <div className="text-white font-serif font-bold text-base tracking-wide">JESS ORVIN</div>
-                <div className="text-white/40 text-xs tracking-widest uppercase mt-0.5">Southern Utah Real Estate Expert</div>
-              </div>
+          {/* Search bar */}
+          <div className="max-w-xl mx-auto">
+            <div className="flex items-stretch bg-white">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="City, community, or address..."
+                className="flex-1 px-5 py-4 text-sm text-black placeholder:text-stone-400 outline-none font-sans tracking-wide"
+              />
+              <Link
+                href={`/listings${searchQuery ? `?q=${encodeURIComponent(searchQuery)}` : ""}`}
+                className="bg-[#c9a84c] hover:bg-[#b8963c] text-black px-6 flex items-center justify-center transition-colors duration-300"
+              >
+                <SearchIcon className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="flex items-center justify-center gap-6 mt-5">
+              {["St. George", "Ivins", "Washington", "Hurricane"].map((city) => (
+                <Link
+                  key={city}
+                  href={`/listings?city=${encodeURIComponent(city)}`}
+                  className="text-white/35 hover:text-white/70 text-[9px] tracking-[0.2em] uppercase transition-colors duration-300"
+                >
+                  {city}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll arrow */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-5 h-5 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-4 h-4 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       </section>
 
-      {/* ── JESS'S PERSONAL STATS ─────────────────────────────── */}
-      <section className="bg-white border-y border-stone-100">
-        <div className="max-w-5xl mx-auto px-4 py-10">
-          <div className="text-center mb-6">
-            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Jess by the Numbers</div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {/* ══════════════════════════════════════════
+          STATS — white, generous space
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-white py-20 px-6">
+        <div className="max-w-screen-lg mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
             {[
               { value: "50+", label: "Homes Sold" },
               { value: "5★", label: "Client Rating" },
               { value: "10+", label: "Years in Southern Utah" },
-              { value: "#1", label: "Your Expert in St. George" },
+              { value: "#1", label: "Your Southern Utah Expert" },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
-                <div className="font-serif text-3xl font-bold text-[#8b1a4a] mb-1">{stat.value}</div>
-                <div className="text-xs text-[#6b7280] font-medium tracking-wide uppercase">{stat.label}</div>
+                <div className="font-display text-5xl sm:text-6xl font-light text-black mb-2">
+                  {stat.value}
+                </div>
+                <div className="w-8 h-px bg-[#c9a84c] mx-auto mb-3" />
+                <div className="text-[9px] text-stone-400 font-medium tracking-[0.22em] uppercase">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── JESS'S FEATURED LISTINGS ──────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Jess&apos;s Listings</div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold">Personally Listed by Jess</h2>
-            <p className="text-[#6b7280] mt-2 text-sm max-w-md">
-              Every property Jess personally lists is elevated — from photography to pricing strategy.
-            </p>
+      {/* ══════════════════════════════════════════
+          TEAM PHOTO — full width editorial
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section>
+        {/* Full-width image placeholder */}
+        <div className="relative w-full aspect-[3/1] bg-gradient-to-br from-stone-700 via-stone-800 to-stone-900 flex items-center justify-center overflow-hidden">
+          <div className="text-center">
+            <p className="text-white/20 text-[9px] tracking-[0.35em] uppercase">Professional Photo</p>
           </div>
-          <Link href="/listings" className="text-[#8b1a4a] hover:text-[#6d1439] font-semibold text-sm flex items-center gap-1 flex-shrink-0 transition-colors">
-            View All Listings →
-          </Link>
+          {/* Dark gradient overlay at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {jessListings.slice(0, 3).map((listing) => (
-            <ListingCard key={listing.id} listing={listing} onViewDetails={setSelectedListing} />
-          ))}
-        </div>
-
-        <div className="text-center mt-10">
-          <Link href="/listings"
-             className="inline-flex items-center gap-2 border border-stone-200 hover:border-[#8b1a4a] text-[#0d0d0d] hover:text-[#8b1a4a] font-semibold px-7 py-3 rounded-sm text-sm transition-all">
-            View All Jess&apos;s Listings →
-          </Link>
-        </div>
-      </section>
-
-      {/* ── ABOUT JESS MINI ───────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Photo placeholder */}
-          <div className="flex items-center justify-center">
-            <div className="relative">
-              <div className="w-64 h-64 sm:w-80 sm:h-80 bg-[#0d0d0d] border border-[#c9a84c] flex items-center justify-center">
-                <span className="font-serif text-6xl font-bold text-[#c9a84c]">JO</span>
-              </div>
-              {/* Accent badge */}
-              <div className="absolute -bottom-4 -right-4 bg-[#8b1a4a] text-white px-4 py-3">
-                <div className="text-xs font-semibold opacity-80 uppercase tracking-widest">Local Expert</div>
-                <div className="font-serif font-bold text-sm">Southern Utah</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Text */}
-          <div>
-            <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-4">Your Southern Utah Expert</div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold mb-6">Meet Jess Orvin</h2>
-            <p className="text-[#6b7280] leading-relaxed mb-4">
-              Born and raised in Southern Utah, Jess knows this landscape the way only a true local can. She knows which neighborhoods are on the rise, which canyon views are worth every penny, and why the people who move here never want to leave.
-            </p>
-            <p className="text-[#6b7280] leading-relaxed mb-8">
-              Known for her authentic lifestyle brand on TikTok and Instagram, Jess brings the same eye for beauty and storytelling to every listing she touches. She doesn&apos;t just sell homes — she tells their story.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/about"
-                 className="inline-flex items-center justify-center gap-2 bg-[#0d0d0d] hover:bg-[#1a1a1a] text-white font-semibold px-6 py-3 rounded-sm text-sm transition-colors">
-                Learn More About Jess →
-              </Link>
-              <div className="flex items-center gap-3">
-                <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c9a84c] text-[#6b7280] hover:text-[#0d0d0d] font-semibold px-4 py-3 rounded-sm text-sm transition-colors">
-                  <TikTokIcon className="w-3.5 h-3.5" />
-                  {socials.jessTikTok.handle}
-                </a>
-                <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-                   className="flex items-center gap-2 border border-stone-200 hover:border-[#c9a84c] text-[#6b7280] hover:text-[#0d0d0d] font-semibold px-4 py-3 rounded-sm text-sm transition-colors">
-                  <InstagramIcon className="w-3.5 h-3.5" />
-                  {socials.jessInstagram.handle}
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          BRAND TRANSITION DIVIDER
-      ══════════════════════════════════════════════ */}
-      <section className="relative py-14 px-4 overflow-hidden bg-stone-50 border-y border-stone-100">
-        <div className="relative z-10 flex items-center justify-center gap-6 max-w-4xl mx-auto">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-stone-200" />
-          <div className="bg-stone-50 px-6 text-center">
-            <p className="text-[#9ca3af] text-xs font-semibold tracking-widest uppercase mb-2">Jess & Christina are co-founders of</p>
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
-              <span className="font-serif text-lg font-bold" style={{ color: "#1a2744" }}>
-                Utah&apos;s Elevated Real Estate
-              </span>
-              <div className="w-6 h-px" style={{ backgroundColor: "#c9a84c" }} />
-            </div>
-            <p className="text-[#9ca3af] text-xs mt-1.5">Utah&apos;s Premier Real Estate Team</p>
-          </div>
-          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-stone-200" />
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          UTAH'S ELEVATED REAL ESTATE — TEAM BRAND
-      ══════════════════════════════════════════════ */}
-
-      {/* ── TEAM BRAND BANNER ─────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#1a2744" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-10 h-px" style={{ backgroundColor: "#c9a84c" }} />
-              <div className="w-12 h-12 flex items-center justify-center border-2" style={{ backgroundColor: "rgba(201,168,76,0.15)", borderColor: "#c9a84c" }}>
-                <span className="font-serif text-lg font-bold" style={{ color: "#c9a84c" }}>UE</span>
-              </div>
-              <div className="w-10 h-px" style={{ backgroundColor: "#c9a84c" }} />
-            </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
-              Utah&apos;s Elevated Real Estate
+        {/* Text below */}
+        <div className="bg-white py-16 px-6 text-center">
+          <div className="max-w-2xl mx-auto">
+            <Label>Utah&apos;s Elevated Real Estate</Label>
+            <h2 className="font-display text-4xl sm:text-5xl font-light text-black leading-tight mb-6">
+              Best Realtors in Southern Utah
             </h2>
-            <p className="font-semibold text-sm tracking-widest uppercase" style={{ color: "#c9a84c" }}>
-              Utah&apos;s Premier Real Estate Team
+            <p className="text-stone-500 text-sm leading-relaxed tracking-wide max-w-lg mx-auto">
+              Founded by Jess Orvin and Christina Childs, our team brings elevated marketing, deep local knowledge, and genuine care to every transaction across Southern Utah.
             </p>
-            <p className="text-white/60 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
-              Founded by Jess Orvin &amp; Christina Childs, Utah&apos;s Elevated Real Estate is the region&apos;s most innovative team — bringing elevated marketing, deep local expertise, and a genuine commitment to every client.
-            </p>
-            <a href={socials.teamInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-1.5 text-sm mt-5 transition-colors" style={{ color: "#c9a84c" }}>
-              <InstagramIcon className="w-4 h-4" />
-              {socials.teamInstagram.handle}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          SERVICE TILES — dark, full-bleed
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-[#0a0a0a] py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          {/* Heading */}
+          <div className="text-center mb-16">
+            <Label>What We Do</Label>
+            <h2 className="font-display font-light text-white leading-tight">
+              <span className="block text-4xl sm:text-5xl lg:text-6xl">Simplifying Real Estate,</span>
+              <span className="block text-4xl sm:text-5xl lg:text-6xl italic text-[#c9a84c] mt-2">
+                One Home at a Time
+              </span>
+            </h2>
+          </div>
+
+          {/* Tiles */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+            {/* Find a Home */}
+            <Link href="/listings">
+              <div className="tile-hover group relative h-64 sm:h-80 bg-gradient-to-br from-stone-900 to-[#0d0d0d] flex flex-col items-center justify-center cursor-pointer overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] to-[#0d0d0d]" />
+                <div className="relative z-10 text-center px-8">
+                  <p className="font-display text-2xl sm:text-3xl font-light tracking-[0.12em] text-white uppercase mb-4">
+                    Find a Home
+                  </p>
+                  <div className="w-10 h-px bg-[#c9a84c] mx-auto" />
+                  <p className="text-white/40 text-[10px] tracking-[0.2em] uppercase mt-4 group-hover:text-white/70 transition-colors duration-300">
+                    Browse Listings →
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-[#c9a84c]/0 group-hover:bg-[#c9a84c]/5 transition-all duration-500" />
+              </div>
+            </Link>
+
+            {/* Sell My Home */}
+            <Link href="/contact">
+              <div className="tile-hover group relative h-64 sm:h-80 bg-gradient-to-br from-[#111] to-[#1a1a1a] flex flex-col items-center justify-center cursor-pointer overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] via-[#111] to-[#1a1a2e]" />
+                <div className="relative z-10 text-center px-8">
+                  <p className="font-display text-2xl sm:text-3xl font-light tracking-[0.12em] text-white uppercase mb-4">
+                    Sell My Home
+                  </p>
+                  <div className="w-10 h-px bg-[#c9a84c] mx-auto" />
+                  <p className="text-white/40 text-[10px] tracking-[0.2em] uppercase mt-4 group-hover:text-white/70 transition-colors duration-300">
+                    Get Started →
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-[#c9a84c]/0 group-hover:bg-[#c9a84c]/5 transition-all duration-500" />
+              </div>
+            </Link>
+
+            {/* Get My Home's Value — CompIQ */}
+            <a href="https://comp-intelligence.vercel.app" target="_blank" rel="noopener noreferrer">
+              <div className="tile-hover group relative h-64 sm:h-80 flex flex-col items-center justify-center cursor-pointer overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/20 via-[#111] to-[#0d0d0d]" />
+                <div className="relative z-10 text-center px-8">
+                  <p className="font-display text-2xl sm:text-3xl font-light tracking-[0.12em] text-white uppercase mb-4">
+                    Get My Home&apos;s Value
+                  </p>
+                  <div className="w-10 h-px bg-[#c9a84c] mx-auto" />
+                  <p className="text-[#c9a84c]/70 text-[10px] tracking-[0.2em] uppercase mt-4 group-hover:text-[#c9a84c] transition-colors duration-300">
+                    Instant Report →
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-[#c9a84c]/0 group-hover:bg-[#c9a84c]/8 transition-all duration-500" />
+              </div>
             </a>
           </div>
+        </div>
+      </section>
 
-          {/* Team Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-10">
-            {[
-              { value: "6", label: "Team Specialists" },
-              { value: "100+", label: "Homes Sold" },
-              { value: "5★", label: "Team Rating" },
-              { value: "2", label: "Locations Served" },
-            ].map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center">
-                <div className="font-serif text-3xl font-bold mb-1" style={{ color: "#c9a84c" }}>{stat.value}</div>
-                <div className="text-xs font-medium tracking-wide uppercase text-white/50">{stat.label}</div>
-              </div>
+      {/* ══════════════════════════════════════════
+          FEATURED LISTINGS — white, full-width stacked
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-white py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          {/* Section header */}
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
+            <div>
+              <Label>Personally Listed</Label>
+              <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-black leading-none tracking-wide">
+                Featured<br />Listings
+              </h2>
+            </div>
+            <Link
+              href="/listings"
+              className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-stone-500 hover:text-black transition-colors duration-300 group flex-shrink-0 mb-2"
+            >
+              View All
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+          </div>
+
+          {/* Stacked listing rows */}
+          <div className="flex flex-col gap-0">
+            {jessListings.slice(0, 3).map((listing) => (
+              <ListingRow key={listing.id} listing={listing} onView={setSelectedListing} />
             ))}
           </div>
 
-          {/* Team Members mini grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
-            {[
-              { initials: "JO", name: "Jess Orvin", title: "Lead Agent & Founder" },
-              { initials: "CC", name: "Christina Childs", title: "Co-Founder" },
-              { initials: "TB", name: "Tyler Brooks", title: "Real Estate Agent" },
-              { initials: "MC", name: "Madison Clark", title: "Real Estate Agent" },
-              { initials: "RT", name: "Ryan Torres", title: "Real Estate Agent" },
-              { initials: "KJ", name: "Kayla Jensen", title: "Real Estate Agent" },
-            ].map((member, i) => (
-              <div key={member.name} className="flex flex-col items-center text-center">
-                <div className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center mb-3 border ${i < 2 ? "border-yellow-600/40" : "border-white/10"}`}
-                     style={{ backgroundColor: i < 2 ? "rgba(201,168,76,0.2)" : "rgba(255,255,255,0.08)" }}>
-                  <span className="font-serif text-xl font-bold" style={{ color: i < 2 ? "#c9a84c" : "rgba(255,255,255,0.7)" }}>{member.initials}</span>
+          <div className="mt-12 text-center">
+            <Link
+              href="/listings"
+              className="inline-flex items-center gap-3 text-[10px] tracking-[0.22em] uppercase border border-stone-200 text-stone-500 px-10 py-4 hover:border-black hover:text-black transition-all duration-300"
+            >
+              View All Listings
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          ABOUT JESS — clean 2-col
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-white py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            {/* Photo placeholder */}
+            <div className="relative">
+              <div className="w-full aspect-[4/5] bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="font-display text-7xl font-light text-[#c9a84c]/50 mb-2">JO</div>
+                  <p className="text-white/20 text-[9px] tracking-[0.3em] uppercase">Jess Orvin</p>
                 </div>
-                <div className="text-white text-xs font-semibold leading-tight mb-0.5">{member.name}</div>
-                <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>{member.title}</div>
               </div>
-            ))}
-          </div>
+              {/* Gold accent corner */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-[#c9a84c]/30" />
+            </div>
 
-          <div className="text-center">
-            <Link href="/team"
-               className="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded-sm text-sm transition-all border"
-               style={{ backgroundColor: "#c9a84c", borderColor: "#c9a84c", color: "#1a2744" }}>
-              Meet the Full Team →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── UTAH'S ELEVATED REAL ESTATE LISTINGS ─────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#111d33" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            {/* Text */}
             <div>
-              <div className="inline-flex items-center gap-2 mb-3">
-                <div className="w-4 h-px" style={{ backgroundColor: "#c9a84c" }} />
-                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#c9a84c" }}>
-                  Utah&apos;s Elevated Real Estate
-                </span>
-              </div>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white">Team Listings</h2>
-              <p className="mt-2 text-sm max-w-md" style={{ color: "rgba(255,255,255,0.5)" }}>
-                Properties listed by the Utah&apos;s Elevated Real Estate team — six specialists, one standard of excellence.
+              <Label>Your Southern Utah Expert</Label>
+              <h2 className="font-display text-5xl sm:text-6xl font-light text-black mb-8 leading-tight">
+                Meet<br />Jess Orvin
+              </h2>
+              <div className="w-12 h-px bg-[#c9a84c] mb-8" />
+              <p className="text-stone-500 text-sm leading-relaxed tracking-wide mb-5">
+                Born and raised in Southern Utah, Jess knows this landscape the way only a true local can. She knows which neighborhoods are on the rise, which canyon views are worth every penny, and why the people who move here never want to leave.
               </p>
+              <p className="text-stone-500 text-sm leading-relaxed tracking-wide mb-10">
+                Known for her lifestyle brand on TikTok and Instagram, Jess brings the same eye for beauty and storytelling to every listing. She doesn&apos;t just sell homes — she tells their story.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <Link
+                  href="/about"
+                  className="text-[10px] tracking-[0.22em] uppercase border border-black text-black px-8 py-3.5 hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  Learn More
+                </Link>
+                <div className="flex items-center gap-4 pt-2 sm:pt-0">
+                  <a
+                    href={socials.jessTikTok.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-stone-400 hover:text-black text-[10px] tracking-[0.15em] uppercase transition-colors duration-300"
+                  >
+                    <TikTokIcon className="w-3.5 h-3.5" />
+                    {socials.jessTikTok.handle}
+                  </a>
+                  <a
+                    href={socials.jessInstagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-stone-400 hover:text-black text-[10px] tracking-[0.15em] uppercase transition-colors duration-300"
+                  >
+                    <InstagramIcon className="w-3.5 h-3.5" />
+                    {socials.jessInstagram.handle}
+                  </a>
+                </div>
+              </div>
             </div>
-            <Link href="/listings?tab=team" className="font-semibold text-sm flex items-center gap-1 flex-shrink-0 transition-colors" style={{ color: "#c9a84c" }}>
-              All Team Listings →
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          MEET THE TEAM
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-white py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          {/* Full-width team photo placeholder */}
+          <div className="w-full aspect-[16/5] bg-gradient-to-br from-stone-700 via-stone-800 to-stone-900 flex items-center justify-center mb-16">
+            <p className="text-white/20 text-[9px] tracking-[0.35em] uppercase">Team Photo</p>
+          </div>
+          <div className="text-center max-w-xl mx-auto">
+            <Label>Utah&apos;s Elevated Real Estate</Label>
+            <h2 className="font-display text-5xl sm:text-6xl font-light text-black mb-6">
+              Meet the Team
+            </h2>
+            <div className="w-10 h-px bg-[#c9a84c] mx-auto mb-6" />
+            <p className="text-stone-500 text-sm leading-relaxed tracking-wide mb-10">
+              Six specialists, one standard of excellence. Co-founded by Jess Orvin and Christina Childs, our team covers every corner of Southern Utah with expertise and genuine care.
+            </p>
+            <Link
+              href="/team"
+              className="inline-flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase border border-[#c9a84c] text-[#c9a84c] px-8 py-3.5 hover:bg-[#c9a84c] hover:text-black transition-all duration-300"
+            >
+              Meet Everyone
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          TEAM LISTINGS — dark
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-[#0a0a0a] py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
+            <div>
+              <Label>Our Team</Label>
+              <h2 className="font-display text-5xl sm:text-6xl font-light text-white leading-none">
+                Team<br />Listings
+              </h2>
+            </div>
+            <Link
+              href="/listings?tab=team"
+              className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-stone-500 hover:text-white transition-colors duration-300 group flex-shrink-0 mb-2"
+            >
+              All Team Listings
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamListings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} onViewDetails={setSelectedListing} />
+          {/* 2-column mini grid for team listings */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5">
+            {teamListings.slice(0, 4).map((listing) => (
+              <div
+                key={listing.id}
+                className="group cursor-pointer bg-[#0a0a0a]"
+                onClick={() => setSelectedListing(listing)}
+              >
+                <div className="listing-img-wrap relative h-56 sm:h-64">
+                  <div className={`listing-img-inner absolute inset-0 bg-gradient-to-br ${listing.gradient}`} />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className={`text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 ${listing.status === "Active" ? "bg-[#c9a84c] text-black" : "bg-white/80 text-black"}`}>
+                      {listing.status}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-4 left-4 z-10">
+                    <div className="font-display text-2xl text-white font-light">{formatPrice(listing.price)}</div>
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-400 z-10" />
+                </div>
+                <div className="p-5 border-b border-white/5 group-hover:border-[#c9a84c]/20 transition-colors duration-300">
+                  <h3 className="font-display text-lg font-light text-white tracking-wide">{listing.address}</h3>
+                  <p className="text-stone-600 text-xs mt-1 tracking-wide">{listing.city} · {listing.beds}bd · {listing.baths}ba · {listing.sqft.toLocaleString()} sqft</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link
+              href="/team"
+              className="inline-flex items-center gap-3 text-[10px] tracking-[0.22em] uppercase border border-white/20 text-white/60 px-10 py-4 hover:border-[#c9a84c] hover:text-[#c9a84c] transition-all duration-300"
+            >
+              Meet the Full Team
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          TESTIMONIALS — white, editorial
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-white py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="text-center mb-16">
+            <Label>Client Stories</Label>
+            <h2 className="font-display text-5xl sm:text-6xl font-light text-black">
+              What Clients Say
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+            {testimonials.map((t, i) => (
+              <div key={i} className="flex flex-col">
+                <div className="w-6 h-px bg-[#c9a84c] mb-6" />
+                <blockquote className="font-display text-xl sm:text-2xl font-light text-black leading-relaxed italic flex-1 mb-8">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <div>
+                  <div className="text-[10px] tracking-[0.22em] uppercase text-black font-medium">{t.name}</div>
+                  <div className="text-[10px] tracking-[0.18em] uppercase text-[#c9a84c] mt-1">{t.location}</div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          BACK TO JESS — TESTIMONIALS, VIDEOS, SOCIAL
-      ══════════════════════════════════════════════ */}
-
-      {/* ── TESTIMONIALS ─────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Client Stories</div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold">What Clients Say About Jess</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <div key={i} className="bg-white border border-stone-200 p-7 flex flex-col">
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: 5 }).map((_, s) => (
-                  <svg key={s} className="w-4 h-4 text-[#c9a84c]" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                  </svg>
-                ))}
-              </div>
-              <p className="text-[#6b7280] text-sm leading-relaxed flex-1 mb-5 italic">&ldquo;{t.quote}&rdquo;</p>
-              <div>
-                <div className="font-semibold text-[#0d0d0d] text-sm">{t.name}</div>
-                <div className="text-[#c9a84c] text-xs mt-0.5 font-medium tracking-wide">{t.location}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── VIDEOS ────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+      {/* ══════════════════════════════════════════
+          VIDEOS — dark
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-[#0a0a0a] py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
             <div>
-              <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Market Insights</div>
-              <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold">Jess&apos;s Latest Videos</h2>
-              <p className="text-white/50 mt-2 text-sm">Market updates, neighborhood guides, and buyer/seller tips — straight from Jess.</p>
+              <Label>Market Insights</Label>
+              <h2 className="font-display text-5xl sm:text-6xl font-light text-white leading-none">
+                Latest<br />Videos
+              </h2>
             </div>
-            <Link href="/videos" className="text-[#c9a84c] hover:text-white font-semibold text-sm flex-shrink-0 transition-colors">
-              View All Videos →
+            <Link
+              href="/videos"
+              className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-stone-500 hover:text-white transition-colors duration-300 group flex-shrink-0 mb-2"
+            >
+              View All
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/5">
             {videos.map((video, i) => (
-              <div key={i} className="bg-[#111111] border border-white/10 overflow-hidden group cursor-pointer hover:border-[#c9a84c]/40 transition-colors">
-                <div className="relative h-44 bg-gradient-to-br from-[#111111] to-[#1a1a1a] flex items-center justify-center">
-                  {/* Gold play button */}
-                  <div className="w-14 h-14 bg-[#c9a84c] flex items-center justify-center group-hover:bg-white transition-colors">
-                    <svg className="w-6 h-6 text-[#0d0d0d] ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
+              <div key={i} className="group cursor-pointer bg-[#0a0a0a] hover:bg-[#111] transition-colors duration-300">
+                <div className="relative h-48 bg-gradient-to-br from-[#111] to-[#1a1a1a] flex items-center justify-center overflow-hidden">
+                  <div className="w-12 h-12 border border-[#c9a84c]/50 flex items-center justify-center group-hover:border-[#c9a84c] group-hover:bg-[#c9a84c]/10 transition-all duration-300">
+                    <svg className="w-4 h-4 text-[#c9a84c] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
                     </svg>
                   </div>
                   <div className="absolute top-3 left-3">
-                    <span className="text-[10px] font-semibold bg-[#8b1a4a] text-white px-2 py-0.5 rounded-sm">{video.topic}</span>
+                    <span className="text-[8px] tracking-[0.18em] uppercase bg-[#c9a84c] text-black px-2.5 py-1">
+                      {video.topic}
+                    </span>
                   </div>
                   <div className="absolute bottom-3 right-3">
-                    <span className="text-xs text-white/50 bg-black/60 px-2 py-0.5">{video.duration}</span>
+                    <span className="text-[9px] text-white/40 font-mono">{video.duration}</span>
                   </div>
                 </div>
-                <div className="p-4">
-                  <p className="text-white text-sm font-semibold leading-snug">{video.title}</p>
-                  <p className="text-white/30 text-xs mt-1">Jess Orvin</p>
+                <div className="p-6 border-b border-white/5 group-hover:border-[#c9a84c]/20 transition-colors duration-300">
+                  <h3 className="font-display text-lg font-light text-white leading-snug">{video.title}</h3>
+                  <p className="text-stone-600 text-[9px] tracking-[0.18em] uppercase mt-2">Jess Orvin</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <Link href="/videos"
-               className="inline-flex items-center gap-2 border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-7 py-3 rounded-sm text-sm transition-colors">
-              Watch on YouTube →
+          <div className="mt-10 text-center">
+            <Link
+              href="/videos"
+              className="inline-flex items-center gap-3 text-[10px] tracking-[0.22em] uppercase border border-white/20 text-white/60 px-10 py-4 hover:border-[#c9a84c] hover:text-[#c9a84c] transition-all duration-300"
+            >
+              Watch on YouTube
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── FOLLOW JESS / SOCIAL ──────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <div className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase mb-3">Stay Connected</div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#0d0d0d] font-bold mb-3">Follow Jess</h2>
-          <p className="text-[#6b7280] text-sm max-w-md mx-auto">
-            Behind-the-scenes listings, market tips, and Southern Utah life — on TikTok and Instagram.
-          </p>
-          <div className="flex items-center justify-center gap-6 mt-6">
-            <a href={socials.jessTikTok.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 text-[#0d0d0d] hover:text-[#8b1a4a] font-semibold text-sm transition-colors group">
-              <TikTokIcon className="w-5 h-5" />
-              <div className="text-left">
-                <div className="leading-tight">{socials.jessTikTok.handle}</div>
-                <div className="text-[10px] text-[#9ca3af] font-normal">TikTok</div>
-              </div>
-            </a>
-            <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-2 text-[#0d0d0d] hover:text-[#8b1a4a] font-semibold text-sm transition-colors group">
-              <InstagramIcon className="w-5 h-5" />
-              <div className="text-left">
-                <div className="leading-tight">{socials.jessInstagram.handle}</div>
-                <div className="text-[10px] text-[#9ca3af] font-normal">Instagram</div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        {/* Social grid placeholder */}
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className={`aspect-square overflow-hidden bg-[#0d0d0d] border ${
-              i % 2 === 0 ? "border-[#c9a84c]/20" : "border-white/5"
-            } flex items-center justify-center group cursor-pointer hover:border-[#c9a84c]/60 transition-colors`}>
-              <div className="text-center p-2">
-                <div className="text-white/20 text-[10px] font-medium tracking-widest uppercase">@jessorvin</div>
-              </div>
+      {/* ══════════════════════════════════════════
+          FOLLOW — white, social grid
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-white py-24 px-6">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="text-center mb-12">
+            <Label>Stay Connected</Label>
+            <h2 className="font-display text-5xl sm:text-6xl font-light text-black mb-6">
+              Follow Jess
+            </h2>
+            <div className="flex items-center justify-center gap-8">
+              <a
+                href={socials.jessTikTok.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-stone-400 hover:text-black text-[10px] tracking-[0.2em] uppercase transition-colors duration-300"
+              >
+                <TikTokIcon className="w-4 h-4" />
+                {socials.jessTikTok.handle}
+              </a>
+              <div className="w-px h-4 bg-stone-200" />
+              <a
+                href={socials.jessInstagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-stone-400 hover:text-black text-[10px] tracking-[0.2em] uppercase transition-colors duration-300"
+              >
+                <InstagramIcon className="w-4 h-4" />
+                {socials.jessInstagram.handle}
+              </a>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="text-center mt-6">
-          <a href={socials.jessInstagram.url} target="_blank" rel="noopener noreferrer"
-             className="text-[#6b7280] hover:text-[#8b1a4a] text-sm font-medium transition-colors">
-            View on Instagram →
-          </a>
+          {/* Social grid placeholder */}
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <a
+                key={i}
+                href={socials.jessInstagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group aspect-square bg-stone-50 border border-stone-100 hover:border-[#c9a84c]/50 flex items-center justify-center transition-all duration-300 overflow-hidden"
+              >
+                <div className="text-stone-200 group-hover:text-[#c9a84c]/30 transition-colors duration-300">
+                  <InstagramIcon className="w-5 h-5" />
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── CTA BANNER ────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d]">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="w-12 h-px bg-[#c9a84c]" />
-            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">Ready to Make a Move?</span>
-            <div className="w-12 h-px bg-[#c9a84c]" />
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold mb-5">
-            Let&apos;s Find Your Place in Southern Utah
+      {/* ══════════════════════════════════════════
+          CTA BANNER — black
+      ══════════════════════════════════════════ */}
+      <Divider />
+      <section className="bg-black py-28 px-6 text-center">
+        <div className="max-w-2xl mx-auto">
+          <Label>Ready to Make a Move?</Label>
+          <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-white leading-tight mb-8">
+            Let&apos;s Find Your Place<br />
+            <em className="text-[#c9a84c]">in Southern Utah</em>
           </h2>
-          <p className="text-white/60 mb-10 max-w-xl mx-auto">
-            Whether you&apos;re buying your first home or selling a luxury estate, Jess is ready to guide you every step of the way — backed by the full Utah&apos;s Elevated Real Estate team.
+          <p className="text-white/40 text-sm leading-relaxed tracking-wide max-w-md mx-auto mb-12">
+            Whether you&apos;re buying your first home or selling a luxury estate, Jess is ready to guide you every step of the way.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/listings"
-               className="bg-[#8b1a4a] hover:bg-[#6d1439] text-white font-semibold px-8 py-4 rounded-sm text-base transition-all">
-              Browse All Listings
+            <Link
+              href="/listings"
+              className="text-[10px] tracking-[0.22em] uppercase bg-[#c9a84c] text-black px-10 py-4 hover:bg-[#b8963c] transition-all duration-300"
+            >
+              Browse Listings
             </Link>
-            <Link href="/contact"
-               className="border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black font-semibold px-8 py-4 rounded-sm text-base transition-all">
+            <Link
+              href="/contact"
+              className="text-[10px] tracking-[0.22em] uppercase border border-white/30 text-white px-10 py-4 hover:border-white hover:bg-white hover:text-black transition-all duration-300"
+            >
               Contact Jess
             </Link>
           </div>

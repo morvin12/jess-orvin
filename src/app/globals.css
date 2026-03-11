@@ -2,27 +2,68 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0d0d0d;
+  --foreground: #0a0a0a;
   --accent-gold: #c9a84c;
-  --accent-rose: #8b1a4a;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent-gold: var(--accent-gold);
-  --color-accent-rose: var(--accent-rose);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: Georgia, 'Times New Roman', serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-.font-serif {
-  font-family: Georgia, 'Times New Roman', serif;
+/* ── Display / Serif heading class ─────────────────────── */
+.font-display {
+  font-family: var(--font-cormorant), Georgia, "Times New Roman", serif;
+}
+
+/* ── Hero subtle gradient animation ─────────────────────── */
+@keyframes heroShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-bg {
+  background: linear-gradient(
+    135deg,
+    #000000 0%,
+    #0a0a0a 30%,
+    #111111 60%,
+    #050505 100%
+  );
+  background-size: 300% 300%;
+  animation: heroShift 18s ease infinite;
+}
+
+/* ── Gold divider ─────────────────────────────────────────── */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.5) 30%,
+    rgba(201, 168, 76, 0.8) 50%,
+    rgba(201, 168, 76, 0.5) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Tile hover scale ────────────────────────────────────── */
+.tile-hover {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.tile-hover:hover {
+  transform: scale(1.02);
+}
+
+/* ── Listing row image inner scale on hover ──────────────── */
+.listing-img-wrap {
+  overflow: hidden;
+}
+.listing-img-inner {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.listing-img-wrap:hover .listing-img-inner {
+  transform: scale(1.03);
 }
